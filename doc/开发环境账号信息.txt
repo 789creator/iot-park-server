@@ -1,0 +1,13 @@
+需要连接长沙云谷vpn
+1、服务端(admin模块)
+ ip：172.20.31.46
+ 账号：root
+ 密码：Cszt!2017
+2 、gdyd-robot-agent1
+  ip:172.20.31.30
+  账号：Administrator
+  密码：Cszt!2017
+3、gdyd-robot-agent2
+  ip:172.20.31.51
+  账号：Administrator
+  密码：Cszt!2017

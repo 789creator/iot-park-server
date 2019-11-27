@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.szzt.iot.admin.modules.sys.dao.ServersDao">
+
+    <select id="getServerStatus" parameterType="java.lang.Integer" resultType="com.szzt.iot.admin.modules.sys.dto.ServerStatusDTO">
+        select ifnull(count(*),0) num,ifnull(#{status},0) status from servers where status = #{status}
+    </select>
+
+
+</mapper>

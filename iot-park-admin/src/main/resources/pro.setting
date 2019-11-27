@@ -1,0 +1,16 @@
+[local]
+# 脚本所在的目录
+scriptBasePath = E:/00pro-code/java/guangdong-mobile/process-robot-server/process-robot-admin/src/main/resources/scripts/
+# 脚本请求地址
+requestPrefix = http://127.0.0.1:7000/process-robot-script/
+[dev]
+scriptBasePath = /usr/share/nginx/html/process-robot-script/
+requestPrefix = http://172.20.31.46/process-robot-script/
+[prod]
+scriptBasePath = /usr/share/nginx/html/process-robot-script/
+requestPrefix = http://172.20.31.46/process-robot-script/
+[activemq]
+queueName = test
+brokerURL = tcp://127.0.0.1:61616
+username = admin
+password = password

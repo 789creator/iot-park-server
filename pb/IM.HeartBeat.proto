@@ -1,0 +1,11 @@
+package IM.HeartBeat;
+option java_package = "com.szzt.iot.common.netty.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+message IMHeartBeatData{
+
+	required bytes channel_id = 1;				
+	optional bytes msg_data = 2;
+	
+}

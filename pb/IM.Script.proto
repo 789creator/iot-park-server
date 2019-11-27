@@ -1,0 +1,66 @@
+package IM.Message;
+import "IM.BaseDefine.proto";
+option java_package = "com.szzt.iot.common.netty.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+ 
+message IMSikulixData{
+	//cmd id:		
+	required bytes from_ip = 1;				//消息发送方
+	required bytes to_ip = 2;				//消息接受方
+	required bytes script_file = 3;
+	required sint64 create_time = 4;
+	optional bytes script_params = 5;
+	optional bytes attach_file = 6;
+	required bytes script_type = 7;
+}
+message IMSeleniumData{
+	//cmd id:		
+	required bytes from_ip = 1;				//消息发送方
+	required bytes to_ip = 2;				//消息接受方
+	required bytes script_file = 3;
+	required sint64 create_time = 4;
+	optional bytes script_params = 5;
+	optional bytes attach_file = 6;
+	required bytes script_type = 7;
+}
+
+message IMSikulixTestDataAck{
+	
+	optional bytes test_data = 1;			
+}
+message IMScriptSync{
+	required bytes request_prefix = 1; // 请求地址前缀	
+	required bytes script_data = 2;	   // 脚本信息
+	required bytes from_ip = 3;				//消息发送方
+	required bytes to_ip = 4;				//消息接受方
+	required bytes user_id = 5;            // userId
+	
+	}
+message IMFileSync{
+	required bytes request_prefix = 1; // 请求地址前缀	
+	required bytes file_data = 2;	   // 文件信息
+	required bytes from_ip = 3;				//消息发送方
+	required bytes to_ip = 4;				//消息接受方
+	required bytes user_id = 5;            // userId
+	
+}
+message IMScriptSyncFeedback{
+	required bool is_success = 1;      // 是否成功	
+	required bytes start_time = 2;	   // 开始时间
+	required bytes ent_time = 3;	   //结束时间
+	required bytes from_ip = 4;		  //消息发送方
+	required bytes to_ip = 5;		//消息接受方
+	required bytes script_data = 6;	   // 脚本信息
+	
+}
+message IMFileSyncFeedback{
+	required bool is_success = 1;      // 是否成功	
+	required bytes start_time = 2;	   // 开始时间
+	required bytes ent_time = 3;	   //结束时间
+	required bytes from_ip = 4;		  //消息发送方
+	required bytes to_ip = 5;		//消息接受方
+	required bytes File_data = 6;	   // 文件信息
+	
+}

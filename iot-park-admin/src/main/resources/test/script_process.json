@@ -1,0 +1,70 @@
+[
+  {
+    "script_id": 1,
+    "script_name": "脚本1",
+    "is_local": true,
+    "address_ip ": "127.0.0.1",
+    "previous_script": 0,
+    "next_script": [
+      {
+        "script_id": 1,
+        "script_name": "脚本1",
+        "is_local": true,
+        "address_ip ": "127.0.0.1",
+        "previous_script": 1,
+        "next_script": [
+          {
+            "script_id": 2,
+            "script_name": "脚本1",
+            "is_local": true,
+            "address_ip ": "127.0.0.1",
+            "previous_script": 1,
+            "next_script": []
+          }
+        ]
+      },
+      {
+        "script_id": 3,
+        "script_name": "脚本3",
+        "is_local": false,
+        "address_ip ": "192.168.12.18",
+        "previous_script": 1,
+        "next_script": []
+      }
+    ]
+  },
+  {
+    "script_id": 1,
+    "script_name": "脚本1",
+    "is_local": true,
+    "address_ip ": "127.0.0.1",
+    "previous_script": 0,
+    "next_script": [
+      {
+        "script_id": 1,
+        "script_name": "脚本1",
+        "is_local": true,
+        "address_ip ": "127.0.0.1",
+        "previous_script": 1,
+        "next_script": [
+          {
+            "script_id": 2,
+            "script_name": "脚本1",
+            "is_local": true,
+            "address_ip ": "127.0.0.1",
+            "previous_script": 1,
+            "next_script": []
+          }
+        ]
+      },
+      {
+        "script_id": 3,
+        "script_name": "脚本3",
+        "is_local": false,
+        "address_ip ": "192.168.12.18",
+        "previous_script": 1,
+        "next_script": []
+      }
+    ]
+  }
+]

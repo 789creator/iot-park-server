@@ -1,0 +1,1 @@
+E:/00pro-code/java/zt-robot/robot-server/robot-agent/target/classes/Sikulix/script/test/test.sikuli123
