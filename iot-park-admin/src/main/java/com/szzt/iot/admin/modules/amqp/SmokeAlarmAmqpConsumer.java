@@ -34,6 +34,7 @@ public class SmokeAlarmAmqpConsumer {
 
     @PostConstruct
     public void init() throws Exception {
+        // todo 从数据库读取参数或者从配置文件读取
         //参数说明，请参见上一篇文档：AMQP客户端接入说明。
         String accessKey = "LTAI4FgPrS8g4wnkcZqCpY7Q";
         String accessSecret = "XP2TRvbvrRN3EtoccZ3T8Z4zSBDz3W";
