@@ -12,7 +12,7 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
+//@Component
 public class HeartbeatConsumerServiceImpl implements IMessageConsumerService {
 
     @Autowired

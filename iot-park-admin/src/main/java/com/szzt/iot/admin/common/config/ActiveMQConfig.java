@@ -15,8 +15,8 @@ import javax.jms.Topic;
  *
  * @author zhouhongjin
  */
-@Configuration
-@EnableJms
+//@Configuration
+//@EnableJms
 public class ActiveMQConfig {
 
 //    @Bean(name = "judgeReplyResultQueue")

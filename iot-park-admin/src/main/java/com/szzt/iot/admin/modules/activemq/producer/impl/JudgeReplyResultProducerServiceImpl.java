@@ -21,7 +21,7 @@ import java.net.UnknownHostException;
  * @author zhouhongjin
  */
 @Slf4j
-@Service("judgeReplyResultProducerServiceImpl")
+//@Service("judgeReplyResultProducerServiceImpl")
 public class JudgeReplyResultProducerServiceImpl implements IMessageProducerService {
 
     @Resource

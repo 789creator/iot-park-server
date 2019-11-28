@@ -2,9 +2,9 @@ package com.szzt.iot.admin.modules.device.controller;
 
 import com.szzt.iot.admin.common.annotation.LogOperation;
 import com.szzt.iot.admin.common.utils.ExcelUtils;
-import com.szzt.iot.admin.modules.device.dto.DeviceNoticeSmsDTO;
-import com.szzt.iot.admin.modules.device.excel.DeviceNoticeSmsExcel;
-import com.szzt.iot.admin.modules.device.service.DeviceNoticeSmsService;
+import com.szzt.iot.admin.modules.device.dto.DeviceSmokeAlarmDTO;
+import com.szzt.iot.admin.modules.device.excel.DeviceSmokeAlarmExcel;
+import com.szzt.iot.admin.modules.device.service.DeviceSmokeAlarmService;
 import com.szzt.iot.common.constant.Constant;
 import com.szzt.iot.common.page.PageData;
 import com.szzt.iot.common.utils.Result;
@@ -28,17 +28,17 @@ import java.util.Map;
 
 
 /**
- * 告警设备短信接收记录
+ * 烟雾报警数据
  *
  * @author szzt ${email}
- * @since 1.0.0 2019-10-23
+ * @since 1.0.0 2019-11-28
  */
 @RestController
-@RequestMapping("device/notice/sms")
-@Api(tags="告警设备短信接收记录")
-public class DeviceNoticeSmsController {
+@RequestMapping("device/smoke/alarm")
+@Api(tags="烟雾报警数据")
+public class DeviceSmokeAlarmController {
     @Autowired
-    private DeviceNoticeSmsService deviceNoticeSmsService;
+    private DeviceSmokeAlarmService deviceSmokeAlarmService;
 
     @GetMapping("page")
     @ApiOperation("分页")
@@ -48,31 +48,31 @@ public class DeviceNoticeSmsController {
         @ApiImplicitParam(name = Constant.ORDER_FIELD, value = "排序字段", paramType = "query", dataType="String") ,
         @ApiImplicitParam(name = Constant.ORDER, value = "排序方式，可选值(asc、desc)", paramType = "query", dataType="String")
     })
-    @RequiresPermissions("device:notice:sms:page")
-    public Result<PageData<DeviceNoticeSmsDTO>> page(@ApiIgnore @RequestParam Map<String, Object> params){
-        PageData<DeviceNoticeSmsDTO> page = deviceNoticeSmsService.page(params);
+    @RequiresPermissions("device:smoke:alarm:page")
+    public Result<PageData<DeviceSmokeAlarmDTO>> page(@ApiIgnore @RequestParam Map<String, Object> params){
+        PageData<DeviceSmokeAlarmDTO> page = deviceSmokeAlarmService.page(params);
 
-        return new Result<PageData<DeviceNoticeSmsDTO>>().ok(page);
+        return new Result<PageData<DeviceSmokeAlarmDTO>>().ok(page);
     }
 
     @GetMapping("{id}")
     @ApiOperation("信息")
-    @RequiresPermissions("device:notice:sms:info")
-    public Result<DeviceNoticeSmsDTO> get(@PathVariable("id") Long id){
-        DeviceNoticeSmsDTO data = deviceNoticeSmsService.get(id);
+    @RequiresPermissions("device:smoke:alarm:info")
+    public Result<DeviceSmokeAlarmDTO> get(@PathVariable("id") Long id){
+        DeviceSmokeAlarmDTO data = deviceSmokeAlarmService.get(id);
 
-        return new Result<DeviceNoticeSmsDTO>().ok(data);
+        return new Result<DeviceSmokeAlarmDTO>().ok(data);
     }
 
     @PostMapping
     @ApiOperation("保存")
     @LogOperation("保存")
-    @RequiresPermissions("device:notice:sms:save")
-    public Result save(@RequestBody DeviceNoticeSmsDTO dto){
+    @RequiresPermissions("device:smoke:alarm:save")
+    public Result save(@RequestBody DeviceSmokeAlarmDTO dto){
         //效验数据
         ValidatorUtils.validateEntity(dto, AddGroup.class, DefaultGroup.class);
 
-        deviceNoticeSmsService.save(dto);
+        deviceSmokeAlarmService.save(dto);
 
         return new Result();
     }
@@ -80,12 +80,12 @@ public class DeviceNoticeSmsController {
     @PutMapping
     @ApiOperation("修改")
     @LogOperation("修改")
-    @RequiresPermissions("device:notice:sms:update")
-    public Result update(@RequestBody DeviceNoticeSmsDTO dto){
+    @RequiresPermissions("device:smoke:alarm:update")
+    public Result update(@RequestBody DeviceSmokeAlarmDTO dto){
         //效验数据
         ValidatorUtils.validateEntity(dto, UpdateGroup.class, DefaultGroup.class);
 
-        deviceNoticeSmsService.update(dto);
+        deviceSmokeAlarmService.update(dto);
 
         return new Result();
     }
@@ -93,12 +93,12 @@ public class DeviceNoticeSmsController {
     @DeleteMapping
     @ApiOperation("删除")
     @LogOperation("删除")
-    @RequiresPermissions("device:notice:sms:delete")
+    @RequiresPermissions("device:smoke:alarm:delete")
     public Result delete(@RequestBody Long[] ids){
         //效验数据
         AssertUtils.isArrayEmpty(ids, "id");
 
-        deviceNoticeSmsService.delete(ids);
+        deviceSmokeAlarmService.delete(ids);
 
         return new Result();
     }
@@ -106,11 +106,11 @@ public class DeviceNoticeSmsController {
     @GetMapping("export")
     @ApiOperation("导出")
     @LogOperation("导出")
-    @RequiresPermissions("device:notice:sms:export")
+    @RequiresPermissions("device:smoke:alarm:export")
     public void export(@ApiIgnore @RequestParam Map<String, Object> params, HttpServletResponse response) throws Exception {
-        List<DeviceNoticeSmsDTO> list = deviceNoticeSmsService.list(params);
+        List<DeviceSmokeAlarmDTO> list = deviceSmokeAlarmService.list(params);
 
-        ExcelUtils.exportExcelToTarget(response, null, list, DeviceNoticeSmsExcel.class);
+        ExcelUtils.exportExcelToTarget(response, null, list, DeviceSmokeAlarmExcel.class);
     }
 
 }

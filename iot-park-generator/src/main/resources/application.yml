@@ -9,7 +9,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     #MySQL配置
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://dev-mysql-server:3306/dev_process_robot?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://dev-mysql-server:3306/dev_iot_park?useUnicode=true&characterEncoding=UTF-8&useSSL=false
 #    url: jdbc:mysql://localhost:3306/dev_process_robot?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: SmartCity@*6655
