@@ -1,7 +1,7 @@
 package com.szzt.iot.transfer.config;
 
-import com.szzt.iot.admin.modules.sys.service.SysConfigService;
 import com.szzt.iot.common.utils.SpringContextUtils;
+import com.szzt.iot.transfer.db.service.SysConfigService;
 
 import java.util.HashMap;
 import java.util.Map;

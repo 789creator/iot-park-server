@@ -1,7 +1,7 @@
 package com.szzt.iot.transfer.amqp.listener;
 
-import com.szzt.iot.admin.modules.device.service.DeviceSmokeAlarmService;
 import com.szzt.iot.common.utils.SpringContextUtils;
+import com.szzt.iot.transfer.db.service.DeviceSmokeAlarmService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

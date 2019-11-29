@@ -7,7 +7,7 @@
     <packaging>pom</packaging>
 
     <name>iot-park-server</name>
-    <description>机器人</description>
+    <description>智慧园区</description>
     <url>https://www.xxxx.com.cn/</url>
 
     <parent>
@@ -22,7 +22,6 @@
         <module>iot-park-api</module>
         <module>iot-park-generator</module>
         <module>iot-park-agent</module>
-        <module>iot-park-monitor</module>
         <module>iot-park-test</module>
         <module>iot-park-transfer</module>
     </modules>

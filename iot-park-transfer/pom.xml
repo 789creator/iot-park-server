@@ -15,59 +15,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-
-        <quartz.version>2.3.0</quartz.version>
-        <shiro.version>1.4.0</shiro.version>
-        <kaptcha.version>0.0.9</kaptcha.version>
-        <easypoi.version>3.1.0</easypoi.version>
-        <qiniu.version>[7.2.0, 7.2.99]</qiniu.version>
-        <aliyun.oss.version>2.8.3</aliyun.oss.version>
-        <aliyun.core.version>3.2.2</aliyun.core.version>
-        <aliyun.dysmsapi.version>1.1.0</aliyun.dysmsapi.version>
-        <qcloud.cos.version>5.4.4</qcloud.cos.version>
-        <qcloud.qcloudsms.version>1.0.5</qcloud.qcloudsms.version>
-        <fastdfs.version>1.26.2</fastdfs.version>
-        <freemarker.version>2.3.28</freemarker.version>
-        <activiti.version>5.22.0</activiti.version>
-        <weixin-java.version>3.4.0</weixin-java.version>
+        <qpid-jms-client.version>0.47.0</qpid-jms-client.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-activemq</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
-
-        <!--<dependency>-->
-        <!--<groupId>org.springframework</groupId>-->
-        <!--<artifactId>spring-context-support</artifactId>-->
-        <!--</dependency>-->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!--<dependency>-->
-        <!--<groupId>redis.clients</groupId>-->
-        <!--<artifactId>jedis</artifactId>-->
-        <!--<version>${jedis.version}</version>-->
-        <!--</dependency>-->
-        <!--微信公众号-->
-        <!--<dependency>-->
-        <!--<groupId>com.github.binarywang</groupId>-->
-        <!--<artifactId>wx-java-mp-starter</artifactId>-->
-        <!--<version>${weixin-java.version}</version>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>com.szzt</groupId>
@@ -79,7 +30,7 @@
         <dependency>
             <groupId>org.apache.qpid</groupId>
             <artifactId>qpid-jms-client</artifactId>
-            <version>0.47.0</version>
+            <version>${qpid-jms-client.version}</version>
         </dependency>
         <!-- util for base64-->
         <!--        <dependency>-->

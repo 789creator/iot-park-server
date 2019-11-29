@@ -1,11 +1,11 @@
 package com.szzt.iot.transfer.db.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.szzt.iot.admin.modules.sys.dao.SysConfigDao;
-import com.szzt.iot.admin.modules.sys.dto.SysConfigDTO;
-import com.szzt.iot.admin.modules.sys.entity.SysConfigEntity;
-import com.szzt.iot.admin.modules.sys.service.SysConfigService;
 import com.szzt.iot.common.service.impl.CrudServiceImpl;
+import com.szzt.iot.transfer.db.dao.SysConfigDao;
+import com.szzt.iot.transfer.db.dto.SysConfigDTO;
+import com.szzt.iot.transfer.db.entity.SysConfigEntity;
+import com.szzt.iot.transfer.db.service.SysConfigService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
 package com.szzt.iot.transfer.db.service;
 
-import com.szzt.iot.admin.modules.sys.dto.SysConfigDTO;
-import com.szzt.iot.admin.modules.sys.entity.SysConfigEntity;
 import com.szzt.iot.common.service.CrudService;
+import com.szzt.iot.transfer.db.dto.SysConfigDTO;
+import com.szzt.iot.transfer.db.entity.SysConfigEntity;
 
 import java.util.Map;
 

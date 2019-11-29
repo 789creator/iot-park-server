@@ -1,6 +1,6 @@
 package com.szzt.iot.transfer.amqp.config;
 
-import com.szzt.iot.admin.modules.amqp.SmokeAlarmAmqpConsumer;
+import com.szzt.iot.transfer.amqp.SmokeAlarmAmqpConsumer;
 import org.springframework.context.annotation.Bean;
 
 /**
