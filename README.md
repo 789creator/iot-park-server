@@ -1,42 +1,27 @@
-# not just a robot!
+# 智慧园区（IOT）
+
+https://help.aliyun.com/document_detail/131611.html?spm=a2c4g.11186623.6.558.16636710yilLYS
+
+## 阿里云物联网平台资料
 
 
-## 产品线路
+   ![](./img/156896265461629.png)
+      
+   产品架构   
+   ![](./img/15659255653364_zh-CN.png) 
    
-   宣传标语（slogan）：
+   数据流转过程示意图
+   ![](./img/p58873.png) 
    
-     不仅仅是一个机器人！（not just a robot!） 
+   ![](./img/p33636.png) 
    
-   ps:
-   
-       首先，我是一个流程自动化机器人，协助处理大量的重复的手工操作，减低出错率
-       
-       其次，我不仅仅只是一个机器人，我也正在努力尝试以人类的思维方式工作
-       
-       First,I am a RPA(Robotic Process Automation)，helping deal with great deals of activities that are repetitive, reducing faults.
-       
-       Second,I am not just a robot,I am trying to work like a man.
-       
-   
-   产品开发计划线路：
-    
-    第01步：集成sikulix
-    第02步：集成Selenium
-    第03步：集成robotframework
-    ...
-    第10步：脚本可视化制作
-    第11步：机器学习
-    第12步：深度学习
-    ... 
-    not just a robot
-    
    
 
 ## 
 
 阿里云远程桌面 118.31.110.156 administrator admin@123
 
-  ![](./img/20190611163804.png)
+ 
 
 ## 项目结构
   

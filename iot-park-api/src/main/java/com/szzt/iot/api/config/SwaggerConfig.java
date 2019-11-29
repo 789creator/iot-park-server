@@ -45,7 +45,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
             .title("证通电子")
-            .description("renren-api模块接口文档")
+            .description("iot-api模块接口文档")
             .termsOfServiceUrl("https://www.szzt.com.cn")
             .version("2.0")
             .build();

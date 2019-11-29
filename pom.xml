@@ -24,6 +24,7 @@
         <module>iot-park-agent</module>
         <module>iot-park-monitor</module>
         <module>iot-park-test</module>
+        <module>iot-park-transfer</module>
     </modules>
 
     <properties>

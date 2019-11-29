@@ -8,6 +8,7 @@
 
 package com.szzt.iot.admin;
 
+import com.szzt.iot.admin.modules.amqp.annotation.EnableAmqpConsumer;
 import com.szzt.iot.common.dynamic.datasource.annotation.EnableDynamicDataSource;
 import com.szzt.iot.admin.modules.netty.server.annotation.EnableNettyServer;
 import org.springframework.boot.SpringApplication;
@@ -28,6 +29,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableNettyServer
 @EnableDynamicDataSource
 @ComponentScan("com.szzt.iot")
+@EnableAmqpConsumer
 public class AdminApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

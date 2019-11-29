@@ -32,7 +32,7 @@ public class CaptchaServiceImpl implements CaptchaService {
     private Producer producer;
     @Autowired
     private RedisUtils redisUtils;
-    @Value("${renren.redis.open: false}")
+    @Value("${iot.redis.open: false}")
     private boolean open;
     /**
      * Local Cache  5分钟过期

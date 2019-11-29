@@ -1,44 +1,36 @@
 package com.szzt.iot.admin.modules.amqp;
 
-import com.szzt.iot.admin.modules.device.service.DeviceSmokeAlarmService;
-import com.szzt.iot.common.utils.SpringContextUtils;
-import org.apache.commons.codec.binary.Base64;
+import com.szzt.iot.admin.common.config.SysParamConfig;
+import com.szzt.iot.admin.modules.amqp.listener.SmokeAlarmConnectionListener;
+import com.szzt.iot.admin.modules.amqp.listener.SmokeAlarmMessageListener;
 import org.apache.qpid.jms.JmsConnection;
 import org.apache.qpid.jms.JmsConnectionListener;
 import org.apache.qpid.jms.message.JmsInboundMessageDispatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
 import javax.jms.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import java.net.URI;
 import java.util.Hashtable;
 
 /**
  * @author zhouhongjin
  */
-@Component
-public class SmokeAlarmAmqpConsumer {
+public class SmokeAlarmAmqpConsumer extends BaseAmqpConsumer {
 
     private final static Logger logger = LoggerFactory.getLogger(SmokeAlarmAmqpConsumer.class);
-    Connection connection;
-    MessageConsumer consumer;
 
-
-
-    @PostConstruct
-    public void init() throws Exception {
-        // todo 从数据库读取参数或者从配置文件读取
+    public void startConsumer() throws Exception {
         //参数说明，请参见上一篇文档：AMQP客户端接入说明。
-        String accessKey = "LTAI4FgPrS8g4wnkcZqCpY7Q";
-        String accessSecret = "XP2TRvbvrRN3EtoccZ3T8Z4zSBDz3W";
-        String consumerGroupId = "DEFAULT_GROUP";
+        String accessKey = SysParamConfig.getAccessKey();
+        String accessSecret = SysParamConfig.getAccessSecret();
+        String consumerGroupId = SysParamConfig.getSmokeAlarmConsumerGroupId();
         long timeStamp = System.currentTimeMillis();
         //签名方法：支持hmacmd5，hmacsha1和hmacsha256
         String signMethod = "hmacsha1";
@@ -55,11 +47,13 @@ public class SmokeAlarmAmqpConsumer {
                 + "|";
         //password组装方法，请参见上一篇文档：AMQP客户端接入说明。
         String signContent = "authId=" + accessKey + "&timestamp=" + timeStamp;
-        String password = doSign(signContent, accessSecret, signMethod);
+        String password = this.doSign(signContent, accessSecret, signMethod);
         //按照qpid-jms的规范，组装连接URL。
 //        String connectionUrl = "failover:(amqps://${uid}.iot-amqp.${regionId}.aliyuncs.com?amqp.idleTimeout=80000)"
 //                + "?failover.reconnectDelay=30";
-        String connectionUrl = "failover:(amqps://1514464561601806.iot-amqp.cn-shanghai.aliyuncs.com?amqp.idleTimeout=80000)"
+        String uid = SysParamConfig.getUid();
+        String regionId = SysParamConfig.getRegionId();
+        String connectionUrl = "failover:(amqps://"+uid+".iot-amqp."+regionId+".aliyuncs.com?amqp.idleTimeout=80000)"
                 + "?failover.reconnectDelay=30";
 
         Hashtable<String, String> hashtable = new Hashtable<>();
@@ -71,7 +65,7 @@ public class SmokeAlarmAmqpConsumer {
         Destination queue = (Destination) context.lookup("QUEUE");
         // Create Connection
         connection = cf.createConnection(userName, password);
-        ((JmsConnection) connection).addConnectionListener(myJmsConnectionListener);
+        ((JmsConnection) connection).addConnectionListener(new SmokeAlarmConnectionListener());
         // Create Session
         // Session.CLIENT_ACKNOWLEDGE: 收到消息后，需要手动调用message.acknowledge()
         // Session.AUTO_ACKNOWLEDGE: SDK自动ACK（推荐）
@@ -79,92 +73,9 @@ public class SmokeAlarmAmqpConsumer {
         connection.start();
         // Create Receiver Link
         consumer = session.createConsumer(queue);
-        consumer.setMessageListener(messageListener);
+        consumer.setMessageListener(new SmokeAlarmMessageListener());
     }
 
 
-    private static MessageListener messageListener = new MessageListener() {
-        @Override
-        public void onMessage(Message message) {
-            try {
-                byte[] body = message.getBody(byte[].class);
-                String content = new String(body);
-                String topic = message.getStringProperty("topic");
-                String messageId = message.getStringProperty("messageId");
-                logger.info("receive message"
-                        + ", topic = " + topic
-                        + ", messageId = " + messageId
-                        + ", content = " + content);
-                //如果创建Session选择的是Session.CLIENT_ACKNOWLEDGE，这里需要手动ACK。
-                //message.acknowledge();
-                //如果要对收到的消息做耗时的处理，请异步处理，确保这里不要有耗时逻辑。
-                //保存到数据库
-                DeviceSmokeAlarmService deviceSmokeAlarmService= (DeviceSmokeAlarmService) SpringContextUtils.getBean("deviceSmokeAlarmServiceImpl");
-                deviceSmokeAlarmService.saveDB(content);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
 
-    private static JmsConnectionListener myJmsConnectionListener = new JmsConnectionListener() {
-        /**
-         * 连接成功建立。
-         */
-        @Override
-        public void onConnectionEstablished(URI remoteURI) {
-            logger.info("onConnectionEstablished, remoteUri:{}", remoteURI);
-        }
-
-        /**
-         * 尝试过最大重试次数之后，最终连接失败。
-         */
-        @Override
-        public void onConnectionFailure(Throwable error) {
-            logger.error("onConnectionFailure, {}", error.getMessage());
-        }
-
-        /**
-         * 连接中断。
-         */
-        @Override
-        public void onConnectionInterrupted(URI remoteURI) {
-            logger.info("onConnectionInterrupted, remoteUri:{}", remoteURI);
-        }
-
-        /**
-         * 连接中断后又自动重连上。
-         */
-        @Override
-        public void onConnectionRestored(URI remoteURI) {
-            logger.info("onConnectionRestored, remoteUri:{}", remoteURI);
-        }
-
-        @Override
-        public void onInboundMessage(JmsInboundMessageDispatch envelope) {
-        }
-
-        @Override
-        public void onSessionClosed(Session session, Throwable cause) {
-        }
-
-        @Override
-        public void onConsumerClosed(MessageConsumer consumer, Throwable cause) {
-        }
-
-        @Override
-        public void onProducerClosed(MessageProducer producer, Throwable cause) {
-        }
-    };
-
-    /**
-     * password签名计算方法，请参见上一篇文档：AMQP客户端接入说明。
-     */
-    private static String doSign(String toSignString, String secret, String signMethod) throws Exception {
-        SecretKeySpec signingKey = new SecretKeySpec(secret.getBytes(), signMethod);
-        Mac mac = Mac.getInstance(signMethod);
-        mac.init(signingKey);
-        byte[] rawHmac = mac.doFinal(toSignString.getBytes());
-        return Base64.encodeBase64String(rawHmac);
-    }
 }
