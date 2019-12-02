@@ -55,11 +55,11 @@ https://help.aliyun.com/document_detail/131611.html?spm=a2c4g.11186623.6.558.166
         |
         |----SikuliX1-1.1.4-master SikuliX1.1.4源代码 github拷贝下来的master分支（正在开发的分支，非稳定版本），拷贝时间是20190605，如果需要查看最新版本的源代码需要去GitHub上下载
                 
-   ![](./img/20190612075652.png)
+   ![](./img/20191202145050.png)
    
-   ![image](./img/20190611124445.png)
    
 ## 规范分支管理
+
    ![](./img/2019042516125372.jpg)
     
     灵活使用 Git tag 和发行版管理功能
@@ -161,48 +161,26 @@ https://help.aliyun.com/document_detail/131611.html?spm=a2c4g.11186623.6.558.166
       
    ![](./img/20190612093317.png)
       
-### SikuliX1-1.1.3 源码修改部分
-     
-     1、API 模块的 pom文件引用的包，<version>-v1.0-g94ebf38-23</version> --> <version>94ebf38</version>
-      <dependency>
-        <!--这里被替换成了94ebf38-->
-        <groupId>com.github.vidstige</groupId>
-        <artifactId>jadb</artifactId>
-        <!--<version>-v1.0-g94ebf38-23</version>-->
-        <version>94ebf38</version>
-        <!--License Apache 2-->
-     </dependency>
-     2、点击关闭按钮，应该是关闭当前线程，IDE --> org.sikuli.ide.SikuliIDE
-          private void initWindowListener() {
-            setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-            addWindowListener(new WindowAdapter() {
-              @Override
-              public void windowClosing(WindowEvent e) {
-                // TODO 源码被修改过，修改为隐藏窗口
-        //        SikuliIDE.this.quit();
-                sikulixIDE.setVisible(false);
-              }
-            });
-            addComponentListener(new ComponentAdapter() {
-              @Override
-              public void componentResized(ComponentEvent e) {
-                PreferencesUser.getInstance().setIdeSize(SikuliIDE.this.getSize());
-              }
-        
-              @Override
-              public void componentMoved(ComponentEvent e) {
-                PreferencesUser.getInstance().setIdeLocation(SikuliIDE.this.getLocation());
-              }
-            });
-          }
 
 ### 开发环境账号
 
      开发环境，需要连接长沙云谷vpn
-     robot-server服务器地址：172.20.31.16,账号密码为证通云创建虚机时候的默认账号密码（如果有需要，找项目组知道的人要）
-     activemq 安装在172.20.31.16,界面http://172.20.31.16:8161/，账号密码admin/admin
-     msyql 在172.20.31.32
-     redis 在172.20.31.32
+     iot-park-admin服务器地址：
+      ip:172.20.31.41
+      账号：root
+      密码：Cszt!2017
+     Rabbitmq：
+      ip:172.20.31.41
+      账号：admin
+      密码：admin
+     msyql 
+      ip:172.20.31.32
+      账号：
+      密码：
+     redis 
+      ip:172.20.31.32
+      账号：
+      密码：
      
      ps:连接不上开发环境的，请自行在自己电脑上面搭建运行环境
      
@@ -211,9 +189,9 @@ https://help.aliyun.com/document_detail/131611.html?spm=a2c4g.11186623.6.558.166
 
 ### jdk1.8 安装
 
-### python 3.6 安装
+### Nginx 1.16.1 安装
 
-### activeMQ 安装
+### Rabbitmq 3.5.6-1 安装
 
     1、http://activemq.apache.org/components/classic/download/ 下载activemq
    
@@ -325,19 +303,3 @@ https://help.aliyun.com/document_detail/131611.html?spm=a2c4g.11186623.6.558.166
 	}
 	}
 
-##Selenium
- 
-     You can get there quickly by typing the following into your address bar and hitting Enter.
-     Chrome: chrome://extensions
-     Firefox: about:addons
-     
-     配置Google
-     下载http://chromedriver.storage.googleapis.com/index.html,需要找到Google浏览器对应的版本进行下载
-     配置chromedriver.exe 的环境变量
-     // 截图
-     
-  .![](./img/20190704145020.png) 
-
-https://blog.csdn.net/yangwenxue_admin/article/details/73936803
-
-  
