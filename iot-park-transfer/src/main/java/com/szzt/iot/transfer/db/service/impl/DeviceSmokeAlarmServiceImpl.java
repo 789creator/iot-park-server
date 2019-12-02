@@ -56,7 +56,7 @@ public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlar
         deviceSmokeAlarmEntity.setBatteryVoltage((Double) itemBatteryVoltage.get("value"));
         deviceSmokeAlarmEntity.setDataTime(date);
         deviceSmokeAlarmEntity.setDeviceName(deviceName);
-        deviceSmokeAlarmEntity.setDeviceStatus((Integer) itemDeviceStatus.get("DeviceStatus"));
+        deviceSmokeAlarmEntity.setDeviceStatus((Integer) itemDeviceStatus.get("value"));
         deviceSmokeAlarmEntity.setCreateDate(new Date());
         this.baseDao.insert(deviceSmokeAlarmEntity);
     }
