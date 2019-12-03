@@ -170,6 +170,7 @@ https://help.aliyun.com/document_detail/131611.html?spm=a2c4g.11186623.6.558.166
       账号：root
       密码：Cszt!2017
      Rabbitmq：
+      web界面：http://172.20.31.41:15672/
       ip:172.20.31.41
       账号：admin
       密码：admin

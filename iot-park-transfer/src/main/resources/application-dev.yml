@@ -31,3 +31,12 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+  rabbitmq:
+    host: 172.20.31.41
+    port: 5672
+    username: iot-park
+    password: iot-park
+    #确认消息已发送到交换机(Exchange)
+    publisher-confirms: true
+    #确认消息已发送到队列(Queue)
+    publisher-returns: true
