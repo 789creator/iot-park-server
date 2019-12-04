@@ -19,7 +19,7 @@ import com.szzt.iot.admin.modules.message.sms.AbstractSmsService;
 import com.szzt.iot.admin.modules.message.sms.SmsFactory;
 import com.szzt.iot.common.constant.Constant;
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import com.szzt.iot.common.page.PageData;
 import com.szzt.iot.common.service.impl.BaseServiceImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -57,13 +57,13 @@ public class SysSmsServiceImpl extends BaseServiceImpl<SysSmsDao, SysSmsEntity> 
         try {
             map = JSON.parseObject(params, LinkedHashMap.class);
         }catch (Exception e){
-            throw new RobotException(ErrorCode.JSON_FORMAT_ERROR);
+            throw new IotException(ErrorCode.JSON_FORMAT_ERROR);
         }
 
         //短信服务
         AbstractSmsService service = SmsFactory.build();
         if(service == null){
-            throw new RobotException(ErrorCode.SMS_CONFIG);
+            throw new IotException(ErrorCode.SMS_CONFIG);
         }
 
         //发送短信

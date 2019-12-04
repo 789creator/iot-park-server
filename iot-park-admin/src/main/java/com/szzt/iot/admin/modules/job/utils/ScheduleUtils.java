@@ -10,7 +10,7 @@ package com.szzt.iot.admin.modules.job.utils;
 
 import com.szzt.iot.common.constant.Constant;
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import com.szzt.iot.admin.modules.job.entity.ScheduleJobEntity;
 import org.quartz.*;
 
@@ -47,7 +47,7 @@ public class ScheduleUtils {
         try {
             return (CronTrigger) scheduler.getTrigger(getTriggerKey(jobId));
         } catch (SchedulerException e) {
-            throw new RobotException(ErrorCode.JOB_ERROR, e);
+            throw new IotException(ErrorCode.JOB_ERROR, e);
         }
     }
 
@@ -76,7 +76,7 @@ public class ScheduleUtils {
             	pauseJob(scheduler, scheduleJob.getId());
             }
         } catch (SchedulerException e) {
-            throw new RobotException(ErrorCode.JOB_ERROR, e);
+            throw new IotException(ErrorCode.JOB_ERROR, e);
         }
     }
     
@@ -107,7 +107,7 @@ public class ScheduleUtils {
             }
             
         } catch (SchedulerException e) {
-            throw new RobotException(ErrorCode.JOB_ERROR, e);
+            throw new IotException(ErrorCode.JOB_ERROR, e);
         }
     }
 
@@ -122,7 +122,7 @@ public class ScheduleUtils {
         	
             scheduler.triggerJob(getJobKey(scheduleJob.getId()), dataMap);
         } catch (SchedulerException e) {
-            throw new RobotException(ErrorCode.JOB_ERROR, e);
+            throw new IotException(ErrorCode.JOB_ERROR, e);
         }
     }
 
@@ -133,7 +133,7 @@ public class ScheduleUtils {
         try {
             scheduler.pauseJob(getJobKey(jobId));
         } catch (SchedulerException e) {
-            throw new RobotException(ErrorCode.JOB_ERROR, e);
+            throw new IotException(ErrorCode.JOB_ERROR, e);
         }
     }
 
@@ -144,7 +144,7 @@ public class ScheduleUtils {
         try {
             scheduler.resumeJob(getJobKey(jobId));
         } catch (SchedulerException e) {
-            throw new RobotException(ErrorCode.JOB_ERROR, e);
+            throw new IotException(ErrorCode.JOB_ERROR, e);
         }
     }
 
@@ -155,7 +155,7 @@ public class ScheduleUtils {
         try {
             scheduler.deleteJob(getJobKey(jobId));
         } catch (SchedulerException e) {
-            throw new RobotException(ErrorCode.JOB_ERROR, e);
+            throw new IotException(ErrorCode.JOB_ERROR, e);
         }
     }
 }

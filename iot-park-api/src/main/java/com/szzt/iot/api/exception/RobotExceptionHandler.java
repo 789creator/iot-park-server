@@ -9,7 +9,7 @@
 package com.szzt.iot.api.exception;
 
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import com.szzt.iot.common.utils.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +30,8 @@ public class RobotExceptionHandler {
 	/**
 	 * 处理自定义异常
 	 */
-	@ExceptionHandler(RobotException.class)
-	public Result handleRobotException(RobotException ex){
+	@ExceptionHandler(IotException.class)
+	public Result handleRobotException(IotException ex){
 		Result result = new Result();
 		result.error(ex.getCode(), ex.getMsg());
 

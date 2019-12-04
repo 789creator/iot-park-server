@@ -18,7 +18,7 @@ import com.szzt.iot.admin.modules.sys.redis.SysParamsRedis;
 import com.szzt.iot.admin.modules.sys.service.SysParamsService;
 import com.szzt.iot.common.constant.Constant;
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import com.szzt.iot.common.page.PageData;
 import com.szzt.iot.common.service.impl.BaseServiceImpl;
 import com.szzt.iot.common.utils.ConvertUtils;
@@ -127,7 +127,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
         try {
             return clazz.newInstance();
         } catch (Exception e) {
-            throw new RobotException(ErrorCode.PARAMS_GET_ERROR);
+            throw new IotException(ErrorCode.PARAMS_GET_ERROR);
         }
     }
 

@@ -12,7 +12,7 @@ import com.szzt.iot.api.annotation.Login;
 import com.szzt.iot.api.entity.TokenEntity;
 import com.szzt.iot.api.service.TokenService;
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -56,13 +56,13 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
         //token为空
         if(StringUtils.isBlank(token)){
-            throw new RobotException(ErrorCode.TOKEN_NOT_EMPTY);
+            throw new IotException(ErrorCode.TOKEN_NOT_EMPTY);
         }
 
         //查询token信息
         TokenEntity tokenEntity = tokenService.getByToken(token);
         if(tokenEntity == null || tokenEntity.getExpireDate().getTime() < System.currentTimeMillis()){
-            throw new RobotException(ErrorCode.TOKEN_INVALID);
+            throw new IotException(ErrorCode.TOKEN_INVALID);
         }
 
         //设置userId到request里，后续根据userId，获取用户信息

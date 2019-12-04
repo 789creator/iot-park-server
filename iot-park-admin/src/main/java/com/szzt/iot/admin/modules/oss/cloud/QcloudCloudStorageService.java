@@ -17,7 +17,7 @@ import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.PutObjectResult;
 import com.qcloud.cos.region.Region;
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -65,10 +65,10 @@ public class QcloudCloudStorageService extends AbstractCloudStorageService {
             
             client.shutdown();
             if(result.getETag() == null){
-                throw new RobotException(ErrorCode.OSS_UPLOAD_FILE_ERROR, "");
+                throw new IotException(ErrorCode.OSS_UPLOAD_FILE_ERROR, "");
             }
         } catch (IOException e) {
-            throw new RobotException(ErrorCode.OSS_UPLOAD_FILE_ERROR, e, "");
+            throw new IotException(ErrorCode.OSS_UPLOAD_FILE_ERROR, e, "");
         }
 
         return config.getQcloudDomain() + "/" + path;

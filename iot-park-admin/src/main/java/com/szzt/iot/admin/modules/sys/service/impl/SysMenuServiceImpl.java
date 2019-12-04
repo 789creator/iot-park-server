@@ -17,7 +17,7 @@ import com.szzt.iot.admin.modules.sys.service.SysLanguageService;
 import com.szzt.iot.admin.modules.sys.service.SysRoleMenuService;
 import com.szzt.iot.common.constant.Constant;
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import com.szzt.iot.common.service.impl.BaseServiceImpl;
 import com.szzt.iot.common.utils.ConvertUtils;
 import com.szzt.iot.common.utils.HttpContextUtils;
@@ -62,7 +62,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
 
 		//上级菜单不能为自身
 		if(entity.getId().equals(entity.getPid())){
-			throw new RobotException(ErrorCode.SUPERIOR_MENU_ERROR);
+			throw new IotException(ErrorCode.SUPERIOR_MENU_ERROR);
 		}
 
 		//更新菜单

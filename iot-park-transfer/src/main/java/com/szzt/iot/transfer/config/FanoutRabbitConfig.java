@@ -14,8 +14,6 @@ public class FanoutRabbitConfig {
      *  将三个队列都绑定在交换机 fanoutExchange 上
      *  因为是扇型交换机, 路由键无需配置,配置也不起作用
      */
-
-
     @Bean
     public Queue queueA() {
         return new Queue("fanout.A");

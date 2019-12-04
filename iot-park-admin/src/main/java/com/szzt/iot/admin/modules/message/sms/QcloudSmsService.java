@@ -14,7 +14,7 @@ import com.github.qcloudsms.SmsSingleSenderResult;
 import com.szzt.iot.admin.modules.message.service.SysSmsService;
 import com.szzt.iot.common.constant.Constant;
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import com.szzt.iot.common.utils.SpringContextUtils;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class QcloudSmsService extends AbstractSmsService {
         try {
             result = sender.sendWithParam("86", mobile, Integer.parseInt(template), paramsList, signName, null, null);
         } catch (Exception e) {
-            throw new RobotException(ErrorCode.SEND_SMS_ERROR, e, "");
+            throw new IotException(ErrorCode.SEND_SMS_ERROR, e, "");
         }
 
         int status = Constant.SUCCESS;
@@ -63,7 +63,7 @@ public class QcloudSmsService extends AbstractSmsService {
         sysSmsService.save(Constant.SmsService.QCLOUD.getValue(), mobile, params, status);
 
         if(status == Constant.FAIL){
-            throw new RobotException(ErrorCode.SEND_SMS_ERROR, result.errMsg);
+            throw new IotException(ErrorCode.SEND_SMS_ERROR, result.errMsg);
         }
     }
 }

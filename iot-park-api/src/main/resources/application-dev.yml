@@ -31,3 +31,8 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+  rabbitmq:
+    host: 172.20.31.41
+    port: 5672
+    username: iot-park-api
+    password: iot-park-api
