@@ -7,7 +7,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.szzt.iot.common.rabbitmq.MsgHeader;
 import com.szzt.iot.common.rabbitmq.RabbitmqMsg;
-import com.szzt.iot.common.rabbitmq.SmokeAlarmMsgBody;
+import com.szzt.iot.common.rabbitmq.smokealarm.SmokeAlarmMsgBody;
 import com.szzt.iot.common.service.impl.CrudServiceImpl;
 import com.szzt.iot.transfer.config.TopicSmokeAlarmRabbitConfig;
 import com.szzt.iot.transfer.db.dao.DeviceSmokeAlarmDao;

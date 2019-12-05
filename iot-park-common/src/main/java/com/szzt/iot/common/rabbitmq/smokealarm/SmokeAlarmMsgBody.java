@@ -1,4 +1,4 @@
-package com.szzt.iot.common.rabbitmq;
+package com.szzt.iot.common.rabbitmq.smokealarm;
 
 import lombok.Data;
 
