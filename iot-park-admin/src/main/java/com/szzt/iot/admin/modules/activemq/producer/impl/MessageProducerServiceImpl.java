@@ -2,10 +2,10 @@ package com.szzt.iot.admin.modules.activemq.producer.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.szzt.iot.admin.modules.activemq.producer.IMessageProducerService;
-import com.szzt.iot.common.activemq.ActivemqMsg;
-import com.szzt.iot.common.activemq.MsgHeader;
-import com.szzt.iot.common.activemq.MsgHeaderEnum;
-import com.szzt.iot.common.activemq.sikulix.SikulixScriptMsgBody;
+import com.szzt.iot.common.rabbitmq.RabbitmqMsg;
+import com.szzt.iot.common.rabbitmq.MsgHeader;
+import com.szzt.iot.common.rabbitmq.MsgHeaderEnum;
+import com.szzt.iot.common.rabbitmq.sikulix.SikulixScriptMsgBody;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsMessagingTemplate;
 
@@ -48,11 +48,11 @@ public class MessageProducerServiceImpl implements IMessageProducerService {
         body.setScriptPath("Sikulix\\script\\test\\test.sikuli\\test.py");
         body.setScriptName("test");
 
-        ActivemqMsg<SikulixScriptMsgBody> activemqMsg = new ActivemqMsg<>();
-        activemqMsg.setMsgHeader(msgHeader);
-        activemqMsg.setMsgBody(body);
+        RabbitmqMsg<SikulixScriptMsgBody> rabbitmqMsg = new RabbitmqMsg<>();
+        rabbitmqMsg.setMsgHeader(msgHeader);
+        rabbitmqMsg.setMsgBody(body);
 
-        this.jmsMessagingTemplate.convertAndSend(this.topic, JSONUtil.toJsonStr(activemqMsg));
+        this.jmsMessagingTemplate.convertAndSend(this.topic, JSONUtil.toJsonStr(rabbitmqMsg));
 
     }
 }

@@ -2,10 +2,10 @@ package com.szzt.iot.admin.modules.activemq.producer.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.szzt.iot.admin.modules.activemq.producer.IMessageProducerService;
-import com.szzt.iot.common.activemq.ActivemqMsg;
-import com.szzt.iot.common.activemq.MsgHeader;
-import com.szzt.iot.common.activemq.MsgHeaderEnum;
-import com.szzt.iot.common.activemq.sikulix.WorkResultMsgBody;
+import com.szzt.iot.common.rabbitmq.RabbitmqMsg;
+import com.szzt.iot.common.rabbitmq.MsgHeader;
+import com.szzt.iot.common.rabbitmq.MsgHeaderEnum;
+import com.szzt.iot.common.rabbitmq.sikulix.WorkResultMsgBody;
 import org.springframework.jms.core.JmsMessagingTemplate;
 
 import javax.annotation.Resource;
@@ -39,8 +39,8 @@ public class HeartbeatServiceImpl implements IMessageProducerService {
         msgHeader.setCmdId(MsgHeaderEnum.HeartbeatMsgCmdIdEnum.TO_CLIENT_HEARTBEAT.getCode());
         msgHeader.setSendTime(System.currentTimeMillis());
         msgHeader.setToIp((String) msg);
-        ActivemqMsg<WorkResultMsgBody> activemqMsg = new ActivemqMsg<>();
-        activemqMsg.setMsgHeader(msgHeader);
-        this.jmsMessagingTemplate.convertAndSend(this.topic, JSONUtil.toJsonStr(activemqMsg));
+        RabbitmqMsg<WorkResultMsgBody> rabbitmqMsg = new RabbitmqMsg<>();
+        rabbitmqMsg.setMsgHeader(msgHeader);
+        this.jmsMessagingTemplate.convertAndSend(this.topic, JSONUtil.toJsonStr(rabbitmqMsg));
     }
 }

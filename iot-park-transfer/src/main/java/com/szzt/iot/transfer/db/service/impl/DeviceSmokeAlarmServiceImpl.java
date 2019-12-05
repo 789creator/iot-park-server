@@ -5,7 +5,11 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.szzt.iot.common.rabbitmq.MsgHeader;
+import com.szzt.iot.common.rabbitmq.RabbitmqMsg;
+import com.szzt.iot.common.rabbitmq.SmokeAlarmMsgBody;
 import com.szzt.iot.common.service.impl.CrudServiceImpl;
+import com.szzt.iot.transfer.config.TopicSmokeAlarmRabbitConfig;
 import com.szzt.iot.transfer.db.dao.DeviceSmokeAlarmDao;
 import com.szzt.iot.transfer.db.dto.DeviceSmokeAlarmDTO;
 import com.szzt.iot.transfer.db.entity.DeviceSmokeAlarmEntity;
@@ -56,9 +60,10 @@ public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlar
         JSONObject itemDeviceStatus = (JSONObject) items.get("DeviceStatus");
         JSONObject itemBatteryVoltage = (JSONObject) items.get("BatteryVoltage");
 //        JSONObject smokeSensorState = (JSONObject)items.get("SmokeSensorState");
-
+        //  发送消息到消息队列
+        sendToRabbitmq((Integer) itemDeviceStatus.get("value"));
         Long time = (Long) itemBatteryVoltage.get("time");
-        Integer deviceTypeValue = (Integer)itemDeviceType.get("value");
+        Integer deviceTypeValue = (Integer) itemDeviceType.get("value");
 //        Integer smokeSensorStateValue = (Integer) smokeSensorState.get("value");
         DateTime date = DateUtil.date(time);
         DeviceSmokeAlarmEntity deviceSmokeAlarmEntity = new DeviceSmokeAlarmEntity();
@@ -84,7 +89,23 @@ public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlar
 //        deviceSmokeAlarmEntity.setSmokeSensorState(smokeSensorStateValue);
 
         this.baseDao.insert(deviceSmokeAlarmEntity);
-        rabbitTemplate.convertAndSend("testDirectExchange","testDirectRouting",deviceSmokeAlarmEntity);
+        rabbitTemplate.convertAndSend("testDirectExchange", "testDirectRouting", deviceSmokeAlarmEntity);
+    }
+
+    /**
+     * 发送消息到消息队列
+     *
+     * @param deviceStatus
+     */
+    private void sendToRabbitmq(Integer deviceStatus) {
+        // todo
+        MsgHeader msgHeader = new MsgHeader();
+        SmokeAlarmMsgBody smokeAlarmMsgBody = new SmokeAlarmMsgBody();
+        RabbitmqMsg rabbitmqMsg = new RabbitmqMsg<SmokeAlarmMsgBody>();
+        rabbitmqMsg.setMsgHeader(msgHeader);
+        rabbitmqMsg.setMsgBody(smokeAlarmMsgBody);
+        rabbitTemplate.convertAndSend("smokeAlarmTopicExchange", TopicSmokeAlarmRabbitConfig.SMOKE_ALARM_TOPIC, rabbitmqMsg);
+
     }
 
     public static void main(String[] args) {

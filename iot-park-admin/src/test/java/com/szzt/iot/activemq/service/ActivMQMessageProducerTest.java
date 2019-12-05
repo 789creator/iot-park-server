@@ -1,10 +1,10 @@
 package com.szzt.iot.activemq.service;
 
 import cn.hutool.json.JSONUtil;
-import com.szzt.iot.common.activemq.ActivemqMsg;
-import com.szzt.iot.common.activemq.JudgeReplyResultMsgBody;
-import com.szzt.iot.common.activemq.MsgHeader;
-import com.szzt.iot.common.activemq.MsgHeaderEnum;
+import com.szzt.iot.common.rabbitmq.RabbitmqMsg;
+import com.szzt.iot.common.rabbitmq.JudgeReplyResultMsgBody;
+import com.szzt.iot.common.rabbitmq.MsgHeader;
+import com.szzt.iot.common.rabbitmq.MsgHeaderEnum;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
@@ -134,12 +134,12 @@ public class ActivMQMessageProducerTest {
         judgeReplyResultMsgBody.setProjectName("测试");
         judgeReplyResultMsgBody.setJudgePhone("18569080390");
         //创建消息体
-        ActivemqMsg<JudgeReplyResultMsgBody> activemqMsg = new ActivemqMsg<>();
-        activemqMsg.setMsgHeader(msgHeader);
-        activemqMsg.setMsgBody(judgeReplyResultMsgBody);
+        RabbitmqMsg<JudgeReplyResultMsgBody> rabbitmqMsg = new RabbitmqMsg<>();
+        rabbitmqMsg.setMsgHeader(msgHeader);
+        rabbitmqMsg.setMsgBody(judgeReplyResultMsgBody);
         ActivMQMessageProducerTest activMQMessageProducerTest = new ActivMQMessageProducerTest();
         activMQMessageProducerTest.topicName = "robot.to.judge.reply.result.topic";
         activMQMessageProducerTest.subTopic();
-        activMQMessageProducerTest.sendMessage(JSONUtil.toJsonStr(activemqMsg));
+        activMQMessageProducerTest.sendMessage(JSONUtil.toJsonStr(rabbitmqMsg));
     }
 }

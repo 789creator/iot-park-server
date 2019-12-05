@@ -1,4 +1,4 @@
-package com.szzt.iot.common.activemq.sikulix;
+package com.szzt.iot.common.rabbitmq.sikulix;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.Data;

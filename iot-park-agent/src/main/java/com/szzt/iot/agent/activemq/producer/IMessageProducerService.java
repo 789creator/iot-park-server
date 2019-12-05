@@ -1,6 +1,6 @@
 package com.szzt.iot.agent.activemq.producer;
 
-import com.szzt.iot.common.activemq.ActivemqMsg;
+import com.szzt.iot.common.rabbitmq.RabbitmqMsg;
 
 /**
  * 发送消息 接口类
@@ -11,6 +11,6 @@ public interface IMessageProducerService {
      *
      * @param msg
      */
-    public void sendMessage(ActivemqMsg msg);
+    public void sendMessage(RabbitmqMsg msg);
 
 }

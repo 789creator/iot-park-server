@@ -1,9 +1,8 @@
-package com.szzt.iot.common.activemq;
+package com.szzt.iot.common.rabbitmq;
 
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * activemq 消息头

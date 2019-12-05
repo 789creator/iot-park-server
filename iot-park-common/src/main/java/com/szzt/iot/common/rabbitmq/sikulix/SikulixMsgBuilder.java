@@ -1,8 +1,8 @@
-package com.szzt.iot.common.activemq.sikulix;
+package com.szzt.iot.common.rabbitmq.sikulix;
 
-import com.szzt.iot.common.activemq.ActivemqMsg;
-import com.szzt.iot.common.activemq.MsgHeader;
-import com.szzt.iot.common.activemq.MsgHeaderEnum;
+import com.szzt.iot.common.rabbitmq.RabbitmqMsg;
+import com.szzt.iot.common.rabbitmq.MsgHeader;
+import com.szzt.iot.common.rabbitmq.MsgHeaderEnum;
 import lombok.AllArgsConstructor;
 
 /**
@@ -15,16 +15,16 @@ public class SikulixMsgBuilder<T> {
 
     T body;
 
-    public ActivemqMsg<T> builder(SikulixMsgCmdEnum sikulixMsgCmdEnum) {
+    public RabbitmqMsg<T> builder(SikulixMsgCmdEnum sikulixMsgCmdEnum) {
         //创建消息头
         MsgHeader msgHeader = new MsgHeader();
         msgHeader.setServiceId(MsgHeaderEnum.ServiceIdEnum.SIKULIX_SERVICE.getCode());
         msgHeader.setCmdId(sikulixMsgCmdEnum.getCode());
         msgHeader.setSendTime(System.currentTimeMillis());
 
-        ActivemqMsg<T> activemqMsg = new ActivemqMsg<>();
-        activemqMsg.setMsgHeader(msgHeader);
-        activemqMsg.setMsgBody(body);
-        return activemqMsg;
+        RabbitmqMsg<T> rabbitmqMsg = new RabbitmqMsg<>();
+        rabbitmqMsg.setMsgHeader(msgHeader);
+        rabbitmqMsg.setMsgBody(body);
+        return rabbitmqMsg;
     }
 }

@@ -4,10 +4,10 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.szzt.iot.agent.activemq.consumer.IMessageConsumerService;
 import com.szzt.iot.agent.activemq.producer.IMessageProducerService;
-import com.szzt.iot.common.activemq.ActivemqMsg;
-import com.szzt.iot.common.activemq.MsgHeader;
-import com.szzt.iot.common.activemq.MsgHeaderEnum;
-import com.szzt.iot.common.activemq.sikulix.WorkResultMsgBody;
+import com.szzt.iot.common.rabbitmq.RabbitmqMsg;
+import com.szzt.iot.common.rabbitmq.MsgHeader;
+import com.szzt.iot.common.rabbitmq.MsgHeaderEnum;
+import com.szzt.iot.common.rabbitmq.sikulix.WorkResultMsgBody;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 
@@ -63,8 +63,8 @@ public class AgentHeartbeatConsumerServiceImpl implements IMessageConsumerServic
         msgHeader.setServiceId(MsgHeaderEnum.ServiceIdEnum.HEARTBEAT_SERVICE.getCode());
         msgHeader.setCmdId(MsgHeaderEnum.HeartbeatMsgCmdIdEnum.TO_SERVER_HEARTBEAT.getCode());
         msgHeader.setSendTime(System.currentTimeMillis());
-        ActivemqMsg<WorkResultMsgBody> activemqMsg = new ActivemqMsg<>();
-        activemqMsg.setMsgHeader(msgHeader);
-        iMessageProducerService.sendMessage(activemqMsg);
+        RabbitmqMsg<WorkResultMsgBody> rabbitmqMsg = new RabbitmqMsg<>();
+        rabbitmqMsg.setMsgHeader(msgHeader);
+        iMessageProducerService.sendMessage(rabbitmqMsg);
     }
 }

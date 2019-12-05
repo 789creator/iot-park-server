@@ -2,7 +2,7 @@ package com.szzt.iot.agent.activemq.producer.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.szzt.iot.agent.activemq.producer.IMessageProducerService;
-import com.szzt.iot.common.activemq.ActivemqMsg;
+import com.szzt.iot.common.rabbitmq.RabbitmqMsg;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsMessagingTemplate;
 
@@ -24,7 +24,7 @@ public class AgentHeartbeatProducerServiceImpl implements IMessageProducerServic
     private Topic topic;
 
     @Override
-    public void sendMessage(ActivemqMsg msg) {
+    public void sendMessage(RabbitmqMsg msg) {
         this.jmsMessagingTemplate.convertAndSend(this.topic, JSONUtil.toJsonStr(msg));
     }
 }

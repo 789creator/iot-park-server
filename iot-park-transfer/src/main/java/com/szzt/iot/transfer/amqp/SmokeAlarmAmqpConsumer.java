@@ -12,6 +12,8 @@ import javax.jms.Destination;
 import javax.jms.Session;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Hashtable;
 
 /**
@@ -31,7 +33,7 @@ public class SmokeAlarmAmqpConsumer extends BaseAmqpConsumer {
         String signMethod = "hmacsha1";
         //控制台服务端订阅中消费组状态页客户端ID一栏将显示clientId参数。
         //建议使用机器UUID、MAC地址、IP等唯一标识等作为clientId。便于您区分识别不同的客户端。
-        String clientId = "123456789012345678901234567890123456789012345678901234567890";
+        String clientId = "transfer-"+InetAddress.getLocalHost().getHostAddress();
 
         //UserName组装方法，请参见上一篇文档：AMQP客户端接入说明。
         String userName = clientId + "|authMode=aksign"
@@ -70,14 +72,5 @@ public class SmokeAlarmAmqpConsumer extends BaseAmqpConsumer {
         consumer = session.createConsumer(queue);
         consumer.setMessageListener(new SmokeAlarmMessageListener());
     }
-
-//    public static void main(String[] args) {
-//        SmokeAlarmAmqpConsumer ss = new SmokeAlarmAmqpConsumer();
-//        try {
-//            ss.startConsumer();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
 }

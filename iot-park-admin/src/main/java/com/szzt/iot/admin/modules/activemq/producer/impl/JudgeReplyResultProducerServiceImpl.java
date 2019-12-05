@@ -2,13 +2,12 @@ package com.szzt.iot.admin.modules.activemq.producer.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.szzt.iot.admin.modules.activemq.producer.IMessageProducerService;
-import com.szzt.iot.common.activemq.ActivemqMsg;
-import com.szzt.iot.common.activemq.JudgeReplyResultMsgBody;
-import com.szzt.iot.common.activemq.MsgHeader;
-import com.szzt.iot.common.activemq.MsgHeaderEnum;
+import com.szzt.iot.common.rabbitmq.RabbitmqMsg;
+import com.szzt.iot.common.rabbitmq.JudgeReplyResultMsgBody;
+import com.szzt.iot.common.rabbitmq.MsgHeader;
+import com.szzt.iot.common.rabbitmq.MsgHeaderEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsMessagingTemplate;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.jms.Topic;
@@ -48,11 +47,11 @@ public class JudgeReplyResultProducerServiceImpl implements IMessageProducerServ
 
         //创建消息体
 
-        ActivemqMsg<JudgeReplyResultMsgBody> activemqMsg = new ActivemqMsg<>();
-        activemqMsg.setMsgHeader(msgHeader);
-        activemqMsg.setMsgBody((JudgeReplyResultMsgBody) msg);
+        RabbitmqMsg<JudgeReplyResultMsgBody> rabbitmqMsg = new RabbitmqMsg<>();
+        rabbitmqMsg.setMsgHeader(msgHeader);
+        rabbitmqMsg.setMsgBody((JudgeReplyResultMsgBody) msg);
 
-        this.jmsMessagingTemplate.convertAndSend(this.judgeReplyResultTopic, JSONUtil.toJsonStr(activemqMsg));
+        this.jmsMessagingTemplate.convertAndSend(this.judgeReplyResultTopic, JSONUtil.toJsonStr(rabbitmqMsg));
 
     }
 }

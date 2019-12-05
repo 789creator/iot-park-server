@@ -1,4 +1,4 @@
-package com.szzt.iot.common.activemq;
+package com.szzt.iot.common.rabbitmq;
 
 /**
  * activemq消息头部枚举

@@ -1,16 +1,16 @@
-package com.szzt.iot.common.activemq;
+package com.szzt.iot.common.rabbitmq;
 
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * 抽取评委，评委回复结果消息体
+ * 烟雾报警 msg body
  *
  * @author zhouhongjin
  */
 @Data
-public class JudgeReplyResultMsgBody implements Serializable{
+public class SmokeAlarmMsgBody implements Serializable{
     private static final long serialVersionUID = 1L;
     /**
      * 项目编号

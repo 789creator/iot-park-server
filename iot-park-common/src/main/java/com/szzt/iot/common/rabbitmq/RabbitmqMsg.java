@@ -1,4 +1,4 @@
-package com.szzt.iot.common.activemq;
+package com.szzt.iot.common.rabbitmq;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @author zhouhongjin
  */
 @Data
-public class ActivemqMsg<T> implements Serializable {
+public class RabbitmqMsg<T> implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
      * 消息头

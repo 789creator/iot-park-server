@@ -1,4 +1,4 @@
-package com.szzt.iot.common.activemq.system;
+package com.szzt.iot.common.rabbitmq.system;
 
 import lombok.Data;
 
