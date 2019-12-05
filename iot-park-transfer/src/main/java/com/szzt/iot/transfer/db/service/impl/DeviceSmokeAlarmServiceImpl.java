@@ -61,7 +61,7 @@ public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlar
         JSONObject itemBatteryVoltage = (JSONObject) items.get("BatteryVoltage");
 //        JSONObject smokeSensorState = (JSONObject)items.get("SmokeSensorState");
         //  发送消息到消息队列
-        sendToRabbitmq((Integer) itemDeviceStatus.get("value"));
+        this.sendToRabbitmq((Integer) itemDeviceStatus.get("value"));
         Long time = (Long) itemBatteryVoltage.get("time");
         Integer deviceTypeValue = (Integer) itemDeviceType.get("value");
 //        Integer smokeSensorStateValue = (Integer) smokeSensorState.get("value");
