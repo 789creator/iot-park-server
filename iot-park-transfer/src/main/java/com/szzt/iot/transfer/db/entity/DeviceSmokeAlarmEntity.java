@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("device_smoke_alarm")
-public class DeviceSmokeAlarmEntity {
+public class DeviceSmokeAlarmEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
      * id
@@ -36,11 +37,33 @@ public class DeviceSmokeAlarmEntity {
      */
     private Double batteryVoltage;
     /**
-     * 数据产生时间
+     * 设备数据生成时间戳
      */
-    private Date dataTime;
+    private Date eventTime;
     /**
      * 创建时间
      */
     private Date createDate;
+    /**
+     * 设备唯一标示
+     */
+    private String iotId;
+    /**
+     * 产品唯一标示
+     */
+    private String productKey;
+    /**
+     * 设备类型
+     */
+    private String type;
+    /**
+     * 设备类型
+     */
+    private Integer deviceType;
+    /**
+     * 烟雾检测状态
+     */
+    private Integer smokeSensorState;
+
+
 }

@@ -81,3 +81,5 @@ public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlar
 
     }
 }
+
+

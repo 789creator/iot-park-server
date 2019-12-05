@@ -34,10 +34,24 @@ public class DeviceSmokeAlarmDTO implements Serializable {
 	@ApiModelProperty(value = "电池电压")
 	private Double batteryVoltage;
 
-	@ApiModelProperty(value = "数据产生时间")
-	private Date dataTime;
+	@ApiModelProperty(value = "设备数据生成时间戳")
+	private Date eventTime;
 
 	@ApiModelProperty(value = "数据库中记录生成时间")
 	private Date createDate;
+
+	@ApiModelProperty(value = "设备唯一标示")
+	private String iotId;
+
+	@ApiModelProperty(value = "产品唯一标示")
+	private String productKey;
+
+	@ApiModelProperty(value = "设备类型")
+	private String type;
+
+	@ApiModelProperty(value = "烟雾检测状态")
+	private Integer smokeSensorState;
+
+
 
 }

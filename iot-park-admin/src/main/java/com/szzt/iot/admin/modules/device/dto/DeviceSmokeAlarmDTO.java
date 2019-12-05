@@ -19,7 +19,7 @@ import java.util.Date;
 public class DeviceSmokeAlarmDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "id")
 	private Long id;
 
 	@ApiModelProperty(value = "备注名称")

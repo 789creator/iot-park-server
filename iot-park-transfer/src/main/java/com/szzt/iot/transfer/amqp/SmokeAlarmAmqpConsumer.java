@@ -71,6 +71,13 @@ public class SmokeAlarmAmqpConsumer extends BaseAmqpConsumer {
         consumer.setMessageListener(new SmokeAlarmMessageListener());
     }
 
-
+//    public static void main(String[] args) {
+//        SmokeAlarmAmqpConsumer ss = new SmokeAlarmAmqpConsumer();
+//        try {
+//            ss.startConsumer();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }
