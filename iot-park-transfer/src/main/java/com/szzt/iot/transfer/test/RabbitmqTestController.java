@@ -1,5 +1,6 @@
 package com.szzt.iot.transfer.test;
 
+import com.szzt.iot.transfer.config.TopicSmokeAlarmRabbitConfig;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,5 +69,16 @@ public class RabbitmqTestController {
         rabbitTemplate.convertAndSend("fanoutExchange", null, map);
         return "ok";
     }
-
+    @GetMapping("/sendSmokeAlarm")
+    public String sendSmokeAlarm() {
+        String messageId = String.valueOf(UUID.randomUUID());
+        String messageData = "message: sendSmokeAlarm ";
+        String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Map<String, Object> map = new HashMap<>();
+        map.put("messageId", messageId);
+        map.put("messageData", messageData);
+        map.put("createTime", createTime);
+        rabbitTemplate.convertAndSend("smokeAlarmTopicExchange", TopicSmokeAlarmRabbitConfig.SMOKE_ALARM_TOPIC, map);
+        return "ok";
+    }
 }

@@ -9,7 +9,7 @@
 package com.szzt.iot.admin.modules.oss.cloud;
 
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import org.apache.commons.io.FileUtils;
 
 import java.io.ByteArrayInputStream;
@@ -39,7 +39,7 @@ public class LocalCloudStorageService extends AbstractCloudStorageService {
         try {
             FileUtils.copyToFile(inputStream, file);
         } catch (IOException e) {
-            throw new RobotException(ErrorCode.OSS_UPLOAD_FILE_ERROR, e, "");
+            throw new IotException(ErrorCode.OSS_UPLOAD_FILE_ERROR, e, "");
         }
         return config.getLocalDomain() + "/" + path;
     }

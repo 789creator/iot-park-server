@@ -15,7 +15,7 @@ import com.szzt.iot.api.entity.UserEntity;
 import com.szzt.iot.api.service.TokenService;
 import com.szzt.iot.api.service.UserService;
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import com.szzt.iot.common.service.impl.BaseServiceImpl;
 import com.szzt.iot.common.validator.AssertUtils;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -47,7 +47,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, UserEntity> implem
 
 		//密码错误
 		if(!user.getPassword().equals(DigestUtils.sha256Hex(dto.getPassword()))){
-			throw new RobotException(ErrorCode.ACCOUNT_PASSWORD_ERROR);
+			throw new IotException(ErrorCode.ACCOUNT_PASSWORD_ERROR);
 		}
 
 		//获取登录token

@@ -20,7 +20,7 @@ import com.szzt.iot.admin.modules.sys.dto.SysUserDTO;
 import com.szzt.iot.admin.modules.sys.enums.UserStatusEnum;
 import com.szzt.iot.admin.modules.sys.service.SysUserService;
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import com.szzt.iot.common.utils.IpUtils;
 import com.szzt.iot.common.utils.Result;
 import com.szzt.iot.common.validator.AssertUtils;
@@ -113,7 +113,7 @@ public class LoginController {
             log.setCreatorName(login.getUsername());
             sysLogLoginService.save(log);
 
-            throw new RobotException(ErrorCode.ACCOUNT_PASSWORD_ERROR);
+            throw new IotException(ErrorCode.ACCOUNT_PASSWORD_ERROR);
         }
 
         //密码错误
@@ -123,7 +123,7 @@ public class LoginController {
             log.setCreatorName(user.getUsername());
             sysLogLoginService.save(log);
 
-            throw new RobotException(ErrorCode.ACCOUNT_PASSWORD_ERROR);
+            throw new IotException(ErrorCode.ACCOUNT_PASSWORD_ERROR);
         }
 
         //账号停用
@@ -133,7 +133,7 @@ public class LoginController {
             log.setCreatorName(user.getUsername());
             sysLogLoginService.save(log);
 
-            throw new RobotException(ErrorCode.ACCOUNT_DISABLE);
+            throw new IotException(ErrorCode.ACCOUNT_DISABLE);
         }
 
         //登录成功

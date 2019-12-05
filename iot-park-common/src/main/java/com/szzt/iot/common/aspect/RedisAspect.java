@@ -2,7 +2,7 @@
 package com.szzt.iot.common.aspect;
 
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -34,7 +34,7 @@ public class RedisAspect {
                 result = point.proceed();
             }catch (Exception e){
                 logger.error("redis error", e);
-                throw new RobotException(ErrorCode.REDIS_ERROR);
+                throw new IotException(ErrorCode.REDIS_ERROR);
             }
         }
         return result;

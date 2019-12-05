@@ -16,41 +16,41 @@ import com.szzt.iot.common.utils.MessageUtils;
  *
  * @author
  */
-public class RobotException extends RuntimeException {
+public class IotException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
     private int code;
 	private String msg;
 
-	public RobotException(int code) {
+	public IotException(int code) {
 		this.code = code;
 		this.msg = MessageUtils.getMessage(code);
 	}
 
-	public RobotException(int code, String... params) {
+	public IotException(int code, String... params) {
 		this.code = code;
 		this.msg = MessageUtils.getMessage(code, params);
 	}
 
-	public RobotException(int code, Throwable e) {
+	public IotException(int code, Throwable e) {
 		super(e);
 		this.code = code;
 		this.msg = MessageUtils.getMessage(code);
 	}
 
-	public RobotException(int code, Throwable e, String... params) {
+	public IotException(int code, Throwable e, String... params) {
 		super(e);
 		this.code = code;
 		this.msg = MessageUtils.getMessage(code, params);
 	}
 
-	public RobotException(String msg) {
+	public IotException(String msg) {
 		super(msg);
 		this.code = ErrorCode.INTERNAL_SERVER_ERROR;
 		this.msg = msg;
 	}
 
-	public RobotException(String msg, Throwable e) {
+	public IotException(String msg, Throwable e) {
 		super(msg, e);
 		this.code = ErrorCode.INTERNAL_SERVER_ERROR;
 		this.msg = msg;

@@ -21,7 +21,7 @@ import com.aliyuncs.profile.IClientProfile;
 import com.szzt.iot.admin.modules.message.service.SysSmsService;
 import com.szzt.iot.common.constant.Constant;
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import com.szzt.iot.common.utils.SpringContextUtils;
 
 import java.util.LinkedHashMap;
@@ -91,7 +91,7 @@ public class AliyunSmsService extends AbstractSmsService {
             IAcsClient acsClient = new DefaultAcsClient(profile);
             response = acsClient.getAcsResponse(request);
         } catch (ClientException e) {
-            throw new RobotException(ErrorCode.SEND_SMS_ERROR, e, "");
+            throw new IotException(ErrorCode.SEND_SMS_ERROR, e, "");
         }
 
         int status = Constant.SUCCESS;
@@ -104,7 +104,7 @@ public class AliyunSmsService extends AbstractSmsService {
         sysSmsService.save(Constant.SmsService.ALIYUN.getValue(), mobile, params, status);
 
         if(status == Constant.FAIL){
-            throw new RobotException(ErrorCode.SEND_SMS_ERROR, response.getMessage());
+            throw new IotException(ErrorCode.SEND_SMS_ERROR, response.getMessage());
         }
     }
 }

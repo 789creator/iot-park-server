@@ -14,7 +14,7 @@ import com.szzt.iot.admin.modules.message.dao.SysMailTemplateDao;
 import com.szzt.iot.admin.modules.message.dto.SysMailTemplateDTO;
 import com.szzt.iot.admin.modules.message.email.EmailUtils;
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import com.szzt.iot.common.service.impl.CrudServiceImpl;
 import com.szzt.iot.admin.modules.message.entity.SysMailTemplateEntity;
 import com.szzt.iot.admin.modules.message.service.SysMailTemplateService;
@@ -47,7 +47,7 @@ public class SysMailTemplateServiceImpl extends CrudServiceImpl<SysMailTemplateD
                 map = JSON.parseObject(params, Map.class);
             }
         }catch (Exception e){
-            throw new RobotException(ErrorCode.JSON_FORMAT_ERROR);
+            throw new IotException(ErrorCode.JSON_FORMAT_ERROR);
         }
         String[] to = new String[]{mailTo};
         String[] cc = StringUtils.isBlank(mailCc) ? null : new String[]{mailCc};

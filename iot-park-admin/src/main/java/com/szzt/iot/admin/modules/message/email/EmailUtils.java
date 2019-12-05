@@ -15,7 +15,7 @@ import com.szzt.iot.admin.modules.message.service.SysMailTemplateService;
 import com.szzt.iot.admin.modules.sys.service.SysParamsService;
 import com.szzt.iot.common.constant.Constant;
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import com.szzt.iot.common.utils.FtpUtils;
 import freemarker.template.Template;
 import org.apache.commons.io.IOUtils;
@@ -80,7 +80,7 @@ public class EmailUtils {
     public boolean sendMail(Long templateId, String[] to, String[] cc, Map<String, Object> params) throws Exception {
         SysMailTemplateEntity template = sysMailTemplateService.selectById(templateId);
         if (template == null) {
-            throw new RobotException(ErrorCode.MAIL_TEMPLATE_NOT_EXISTS);
+            throw new IotException(ErrorCode.MAIL_TEMPLATE_NOT_EXISTS);
         }
 
         EmailConfig config = sysParamsService.getValueObject(KEY, EmailConfig.class);

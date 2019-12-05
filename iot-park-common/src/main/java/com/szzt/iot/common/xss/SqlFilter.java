@@ -9,7 +9,7 @@
 package com.szzt.iot.common.xss;
 
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -41,7 +41,7 @@ public class SqlFilter {
         //判断是否包含非法字符
         for(String keyword : keywords){
             if(str.indexOf(keyword) != -1){
-                throw new RobotException(ErrorCode.INVALID_SYMBOL);
+                throw new IotException(ErrorCode.INVALID_SYMBOL);
             }
         }
 

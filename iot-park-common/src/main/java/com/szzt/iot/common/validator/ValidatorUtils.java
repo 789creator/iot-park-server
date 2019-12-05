@@ -8,7 +8,7 @@
 
 package com.szzt.iot.common.validator;
 
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -42,7 +42,7 @@ public class ValidatorUtils {
      * @param groups        待校验的组
      */
     public static void validateEntity(Object object, Class<?>... groups)
-            throws RobotException {
+            throws IotException {
         Locale.setDefault(LocaleContextHolder.getLocale());
         Validator validator = Validation.byDefaultProvider().configure().messageInterpolator(
                 new ResourceBundleMessageInterpolator(new MessageSourceResourceBundleLocator(getMessageSource())))
@@ -51,7 +51,7 @@ public class ValidatorUtils {
         Set<ConstraintViolation<Object>> constraintViolations = validator.validate(object, groups);
         if (!constraintViolations.isEmpty()) {
         	ConstraintViolation<Object> constraint = constraintViolations.iterator().next();
-            throw new RobotException(constraint.getMessage());
+            throw new IotException(constraint.getMessage());
         }
     }
 }

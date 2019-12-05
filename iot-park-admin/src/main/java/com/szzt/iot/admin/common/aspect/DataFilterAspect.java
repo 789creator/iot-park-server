@@ -16,7 +16,7 @@ import com.szzt.iot.common.exception.ErrorCode;
 import com.szzt.iot.admin.modules.security.user.SecurityUser;
 import com.szzt.iot.admin.modules.security.user.UserDetail;
 import com.szzt.iot.admin.modules.sys.enums.SuperAdminEnum;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -66,7 +66,7 @@ public class DataFilterAspect {
             return;
         }
 
-        throw new RobotException(ErrorCode.DATA_SCOPE_PARAMS_ERROR);
+        throw new IotException(ErrorCode.DATA_SCOPE_PARAMS_ERROR);
     }
 
     /**

@@ -8,7 +8,7 @@
 
 package com.szzt.iot.admin.modules.security.oauth2;
 
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 
 import java.security.MessageDigest;
 import java.util.UUID;
@@ -46,7 +46,7 @@ public class TokenGenerator {
             byte[] messageDigest = algorithm.digest();
             return toHexString(messageDigest);
         } catch (Exception e) {
-            throw new RobotException("token invalid", e);
+            throw new IotException("token invalid", e);
         }
     }
 }

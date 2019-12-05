@@ -11,7 +11,7 @@ package com.szzt.iot.admin.modules.oss.cloud;
 import com.github.tobato.fastdfs.domain.StorePath;
 import com.github.tobato.fastdfs.service.DefaultGenerateStorageClient;
 import com.szzt.iot.common.exception.ErrorCode;
-import com.szzt.iot.common.exception.RobotException;
+import com.szzt.iot.common.exception.IotException;
 import com.szzt.iot.common.utils.SpringContextUtils;
 
 import java.io.ByteArrayInputStream;
@@ -44,7 +44,7 @@ public class FastDFSCloudStorageService extends AbstractCloudStorageService {
         try {
             storePath = defaultGenerateStorageClient.uploadFile("group1", inputStream, inputStream.available(), suffix);
         }catch (Exception ex){
-            throw new RobotException(ErrorCode.OSS_UPLOAD_FILE_ERROR, ex, ex.getMessage());
+            throw new IotException(ErrorCode.OSS_UPLOAD_FILE_ERROR, ex, ex.getMessage());
         }
 
         return config.getFastdfsDomain() + "/" + storePath.getPath();
