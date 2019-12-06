@@ -13,20 +13,29 @@ import java.io.Serializable;
 public class SmokeAlarmMsgBody implements Serializable{
     private static final long serialVersionUID = 1L;
     /**
-     * 项目编号
+     * 设备名称
      */
-    private String projectNO;
+    private String deviceName;
     /**
-     * 项目名称
+     * 电池电压
      */
-    private String projectName;
+    private Double batteryVoltage;
     /**
-     * 评委电话号码
+     * 设备类型 2：烟雾探测器
      */
-    private String judgePhone;
+    private Integer deviceType;
     /**
-     * 是否参加评标：1是，0否
+     * 设备状态
+     * 0 - 正常状态
+     * 1 - 火警
+     * 2 - 传感器故障
+     * 3 - 电池低电压
+     * 4 - 火警解除
+     * 5 - 传感器故障解除
+     * 6 - 电池低电压解除
+     * 13 - 设备自检
+     * 14 - 设备上电
      */
-    private Integer isBidEvaluation;
+    private Integer deviceStatus;
 
 }

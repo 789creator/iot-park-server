@@ -13,7 +13,6 @@ import javax.jms.Session;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Hashtable;
 
 /**

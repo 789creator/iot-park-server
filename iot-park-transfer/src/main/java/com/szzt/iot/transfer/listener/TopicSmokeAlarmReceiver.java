@@ -1,5 +1,7 @@
 package com.szzt.iot.transfer.listener;
 
+import com.szzt.iot.common.rabbitmq.RabbitmqMsg;
+import com.szzt.iot.common.rabbitmq.smokealarm.SmokeAlarmMsgBody;
 import com.szzt.iot.transfer.config.TopicSmokeAlarmRabbitConfig;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -14,7 +16,8 @@ import java.util.Map;
 @RabbitListener(queues = TopicSmokeAlarmRabbitConfig.SMOKE_ALARM_TOPIC)
 public class TopicSmokeAlarmReceiver {
     @RabbitHandler
-    public void process(Map testMessage) {
-        System.out.println("TopicSmokeAlarmReceiver  : " + testMessage.toString());
+    public void process(RabbitmqMsg testMessage) {
+        System.out.println("MsgHeader  : " + testMessage.getMsgHeader());
+        System.out.println("MsgBody  : " + testMessage.getMsgBody());
     }
 }

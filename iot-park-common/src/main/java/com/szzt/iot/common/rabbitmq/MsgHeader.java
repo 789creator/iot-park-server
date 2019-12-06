@@ -3,6 +3,7 @@ package com.szzt.iot.common.rabbitmq;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * activemq 消息头
@@ -31,45 +32,45 @@ public class MsgHeader implements Serializable{
     /**
      * 消息发送时间
      */
-    private long sendTime;
+    private String sendTime;
 
-    public int getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(int serviceId) {
-        this.serviceId = serviceId;
-    }
-
-    public int getCmdId() {
-        return cmdId;
-    }
-
-    public void setCmdId(int cmdId) {
-        this.cmdId = cmdId;
-    }
-
-    public String getFromIp() {
-        return fromIp;
-    }
-
-    public void setFromIp(String fromIp) {
-        this.fromIp = fromIp;
-    }
-
-    public String getToIp() {
-        return toIp;
-    }
-
-    public void setToIp(String toIp) {
-        this.toIp = toIp;
-    }
-
-    public long getSendTime() {
-        return sendTime;
-    }
-
-    public void setSendTime(long sendTime) {
-        this.sendTime = sendTime;
-    }
+//    public int getServiceId() {
+//        return serviceId;
+//    }
+//
+//    public void setServiceId(int serviceId) {
+//        this.serviceId = serviceId;
+//    }
+//
+//    public int getCmdId() {
+//        return cmdId;
+//    }
+//
+//    public void setCmdId(int cmdId) {
+//        this.cmdId = cmdId;
+//    }
+//
+//    public String getFromIp() {
+//        return fromIp;
+//    }
+//
+//    public void setFromIp(String fromIp) {
+//        this.fromIp = fromIp;
+//    }
+//
+//    public String getToIp() {
+//        return toIp;
+//    }
+//
+//    public void setToIp(String toIp) {
+//        this.toIp = toIp;
+//    }
+//
+//    public long getSendTime() {
+//        return sendTime;
+//    }
+//
+//    public void setSendTime(long sendTime) {
+//        this.sendTime = sendTime;
+//    }
 }

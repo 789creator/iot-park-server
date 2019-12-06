@@ -19,6 +19,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Map;
 
@@ -60,8 +62,9 @@ public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlar
         JSONObject itemDeviceStatus = (JSONObject) items.get("DeviceStatus");
         JSONObject itemBatteryVoltage = (JSONObject) items.get("BatteryVoltage");
 //        JSONObject smokeSensorState = (JSONObject)items.get("SmokeSensorState");
-        //  发送消息到消息队列
-        this.sendToRabbitmq((Integer) itemDeviceStatus.get("value"));
+//        //  发送消息到消息队列
+//        this.sendToRabbitmq((Integer) itemDeviceStatus.get("value"));
+
         Long time = (Long) itemBatteryVoltage.get("time");
         Integer deviceTypeValue = (Integer) itemDeviceType.get("value");
 //        Integer smokeSensorStateValue = (Integer) smokeSensorState.get("value");
@@ -89,18 +92,27 @@ public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlar
 //        deviceSmokeAlarmEntity.setSmokeSensorState(smokeSensorStateValue);
 
         this.baseDao.insert(deviceSmokeAlarmEntity);
-        rabbitTemplate.convertAndSend("testDirectExchange", "testDirectRouting", deviceSmokeAlarmEntity);
+        //  发送消息到消息队列
+        this.sendToRabbitmq(deviceSmokeAlarmEntity);
+//        rabbitTemplate.convertAndSend("testDirectExchange", "testDirectRouting", deviceSmokeAlarmEntity);
     }
 
     /**
      * 发送消息到消息队列
      *
-     * @param deviceStatus
+//     * @param deviceStatus
      */
-    private void sendToRabbitmq(Integer deviceStatus) {
+    private void sendToRabbitmq( DeviceSmokeAlarmEntity deviceSmokeAlarmEntity) {
+
         // todo
         MsgHeader msgHeader = new MsgHeader();
+        String Time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        msgHeader.setSendTime(Time);
         SmokeAlarmMsgBody smokeAlarmMsgBody = new SmokeAlarmMsgBody();
+        smokeAlarmMsgBody.setDeviceStatus(deviceSmokeAlarmEntity.getDeviceStatus());
+        smokeAlarmMsgBody.setDeviceName(deviceSmokeAlarmEntity.getDeviceName());
+        smokeAlarmMsgBody.setBatteryVoltage(deviceSmokeAlarmEntity.getBatteryVoltage());
+        smokeAlarmMsgBody.setDeviceType(deviceSmokeAlarmEntity.getDeviceType());
         RabbitmqMsg rabbitmqMsg = new RabbitmqMsg<SmokeAlarmMsgBody>();
         rabbitmqMsg.setMsgHeader(msgHeader);
         rabbitmqMsg.setMsgBody(smokeAlarmMsgBody);
