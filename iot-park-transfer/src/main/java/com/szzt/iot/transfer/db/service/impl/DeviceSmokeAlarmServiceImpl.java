@@ -6,6 +6,7 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.szzt.iot.common.rabbitmq.MsgHeader;
+import com.szzt.iot.common.rabbitmq.MsgHeaderEnum;
 import com.szzt.iot.common.rabbitmq.RabbitmqMsg;
 import com.szzt.iot.common.rabbitmq.smokealarm.SmokeAlarmMsgBody;
 import com.szzt.iot.common.service.impl.CrudServiceImpl;
@@ -14,11 +15,14 @@ import com.szzt.iot.transfer.db.dao.DeviceSmokeAlarmDao;
 import com.szzt.iot.transfer.db.dto.DeviceSmokeAlarmDTO;
 import com.szzt.iot.transfer.db.entity.DeviceSmokeAlarmEntity;
 import com.szzt.iot.transfer.db.service.DeviceSmokeAlarmService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -31,6 +35,7 @@ import java.util.Map;
  * @since 1.0.0 2019-11-28
  */
 @Service
+@Slf4j
 public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlarmDao, DeviceSmokeAlarmEntity, DeviceSmokeAlarmDTO> implements DeviceSmokeAlarmService {
 
     @Autowired
@@ -91,23 +96,33 @@ public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlar
         //烟雾检测状态
 //        deviceSmokeAlarmEntity.setSmokeSensorState(smokeSensorStateValue);
 
-        this.baseDao.insert(deviceSmokeAlarmEntity);
         //  发送消息到消息队列
-        this.sendToRabbitmq(deviceSmokeAlarmEntity);
-//        rabbitTemplate.convertAndSend("testDirectExchange", "testDirectRouting", deviceSmokeAlarmEntity);
+        try {
+            this.sendToRabbitmq(deviceSmokeAlarmEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("烟雾报警设备发送消息到消息队列出问题了，{}", e.getMessage());
+        }
+
+        this.baseDao.insert(deviceSmokeAlarmEntity);
     }
 
     /**
      * 发送消息到消息队列
-     *
-//     * @param deviceStatus
+     * <p>
+     * //     * @param deviceStatus
      */
-    private void sendToRabbitmq( DeviceSmokeAlarmEntity deviceSmokeAlarmEntity) {
+    private void sendToRabbitmq(DeviceSmokeAlarmEntity deviceSmokeAlarmEntity) throws UnknownHostException {
 
-        // todo
+        // 消息头
         MsgHeader msgHeader = new MsgHeader();
-        String Time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        msgHeader.setSendTime(Time);
+        String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        msgHeader.setSendTime(time);
+        msgHeader.setServiceId(MsgHeaderEnum.ServiceIdEnum.SMOKE_ALARM_SERVICE.getCode());
+        msgHeader.setCmdId(MsgHeaderEnum.SmokeAlarmMsgCmdIdEnum.SMOKE_ALARM_FIRE.getCode());
+        msgHeader.setFromIp(InetAddress.getLocalHost().getHostAddress());
+
+        // 消息体
         SmokeAlarmMsgBody smokeAlarmMsgBody = new SmokeAlarmMsgBody();
         smokeAlarmMsgBody.setDeviceStatus(deviceSmokeAlarmEntity.getDeviceStatus());
         smokeAlarmMsgBody.setDeviceName(deviceSmokeAlarmEntity.getDeviceName());

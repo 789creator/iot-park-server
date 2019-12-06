@@ -9,6 +9,7 @@
         <logger name="org.springframework.web" level="INFO"/>
         <logger name="org.springboot.sample" level="INFO"/>
         <logger name="com.szzt.iot" level="DEBUG"/>
+        <logger name="com.szzt.iot" level="ERROR"/>
     </springProfile>
 
     <!-- 生产环境 -->
