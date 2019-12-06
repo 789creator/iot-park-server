@@ -21,7 +21,6 @@
         <module>iot-park-admin</module>
         <module>iot-park-api</module>
         <module>iot-park-generator</module>
-        <module>iot-park-agent</module>
         <module>iot-park-test</module>
         <module>iot-park-transfer</module>
     </modules>

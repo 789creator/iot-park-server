@@ -17,6 +17,8 @@ import com.szzt.iot.transfer.db.entity.DeviceSmokeAlarmEntity;
 import com.szzt.iot.transfer.db.service.DeviceSmokeAlarmService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,9 +37,8 @@ import java.util.Map;
  * @since 1.0.0 2019-11-28
  */
 @Service
-@Slf4j
 public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlarmDao, DeviceSmokeAlarmEntity, DeviceSmokeAlarmDTO> implements DeviceSmokeAlarmService {
-
+    private static Logger logger = LoggerFactory.getLogger(DeviceSmokeAlarmServiceImpl.class);
     @Autowired
     RabbitTemplate rabbitTemplate;
 
@@ -101,7 +102,7 @@ public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlar
             this.sendToRabbitmq(deviceSmokeAlarmEntity);
         } catch (Exception e) {
             e.printStackTrace();
-            log.error("烟雾报警设备发送消息到消息队列出问题了，{}", e.getMessage());
+            logger.error("烟雾报警设备发送消息到消息队列出问题了，{}", e.getMessage());
         }
 
         this.baseDao.insert(deviceSmokeAlarmEntity);
