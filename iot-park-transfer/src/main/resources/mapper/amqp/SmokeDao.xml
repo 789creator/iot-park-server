@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szzt.iot.transfer.test.amqp.safetysupervision.dao.SmokeDao">
+	<select id="List" resultType="com.szzt.iot.transfer.db.entity.DeviceSmokeAlarmEntity">
+		select s.device_name,s.battery_voltage,s.device_status,s.create_date,s.event_time from device_smoke_alarm s
+		where device_name=#{smokeName} and device_status=#{smokeStatus}
+	</select>
+</mapper>

@@ -25,7 +25,7 @@ public class SmokeAlarmMsgBody implements Serializable{
      */
     private Integer deviceType;
     /**
-     * 设备状态
+     * 设备状态码
      * 0 - 正常状态
      * 1 - 火警
      * 2 - 传感器故障
@@ -37,5 +37,7 @@ public class SmokeAlarmMsgBody implements Serializable{
      * 14 - 设备上电
      */
     private Integer deviceStatus;
+
+    private String SmokeStatus;
 
 }
