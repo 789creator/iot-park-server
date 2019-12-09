@@ -15,7 +15,6 @@ import com.szzt.iot.transfer.db.dao.DeviceSmokeAlarmDao;
 import com.szzt.iot.transfer.db.dto.DeviceSmokeAlarmDTO;
 import com.szzt.iot.transfer.db.entity.DeviceSmokeAlarmEntity;
 import com.szzt.iot.transfer.db.service.DeviceSmokeAlarmService;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,8 +41,6 @@ public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlar
     @Autowired
     RabbitTemplate rabbitTemplate;
 
-    @Autowired
-   private SmokeMessage smokeService;
 
     @Override
     public QueryWrapper<DeviceSmokeAlarmEntity> getWrapper(Map<String, Object> params) {
@@ -101,8 +98,7 @@ public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlar
 
         //  发送消息到消息队列
         try {
-            smokeService.testMessage(deviceSmokeAlarmEntity);
-//            this.sendToRabbitmq(deviceSmokeAlarmEntity);
+            this.sendToRabbitmq(deviceSmokeAlarmEntity);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("烟雾报警设备发送消息到消息队列出问题了，{}", e.getMessage());
