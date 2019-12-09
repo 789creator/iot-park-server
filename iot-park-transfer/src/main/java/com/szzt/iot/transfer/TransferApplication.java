@@ -24,7 +24,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableDynamicDataSource
 @ComponentScan("com.szzt.iot")
-//@EnableAmqpConsumer
+@EnableAmqpConsumer
 public class TransferApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {

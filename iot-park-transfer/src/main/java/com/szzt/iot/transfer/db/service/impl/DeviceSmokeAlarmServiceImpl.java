@@ -42,6 +42,8 @@ public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlar
     @Autowired
     RabbitTemplate rabbitTemplate;
 
+    @Autowired
+   private SmokeMessage smokeService;
 
     @Override
     public QueryWrapper<DeviceSmokeAlarmEntity> getWrapper(Map<String, Object> params) {
@@ -99,7 +101,8 @@ public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlar
 
         //  发送消息到消息队列
         try {
-            this.sendToRabbitmq(deviceSmokeAlarmEntity);
+            smokeService.testMessage(deviceSmokeAlarmEntity);
+//            this.sendToRabbitmq(deviceSmokeAlarmEntity);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("烟雾报警设备发送消息到消息队列出问题了，{}", e.getMessage());

@@ -1,7 +1,6 @@
 package com.szzt.iot.transfer.listener;
 
 import com.szzt.iot.common.rabbitmq.RabbitmqMsg;
-import com.szzt.iot.common.rabbitmq.smokealarm.SmokeAlarmMsgBody;
 import com.szzt.iot.transfer.config.TopicSmokeAlarmRabbitConfig;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
