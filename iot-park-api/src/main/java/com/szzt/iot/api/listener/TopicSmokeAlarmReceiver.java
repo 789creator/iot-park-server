@@ -14,7 +14,7 @@ import java.util.Map;
 @RabbitListener(queues = TopicSmokeAlarmRabbitConfig.SMOKE_ALARM_TOPIC)
 public class TopicSmokeAlarmReceiver {
     @RabbitHandler
-    public void process(Map testMessage) {
+    public void process(Object testMessage) {
         System.out.println("TopicSmokeAlarmReceiver  : " + testMessage.toString());
     }
 }

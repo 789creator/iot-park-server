@@ -25,21 +25,13 @@ https://help.aliyun.com/document_detail/131611.html?spm=a2c4g.11186623.6.558.166
 
 ## 项目结构
   
-        ----robot-server 项目根目录
+        ----iot-park-server 项目根目录
         |
-        |----robot-admin 后台管理模块
+        |----iot-park-admin 后台管理模块
         |    |--db 存放admin模块需要的数据库文件
         |    |--src 源文件
         |    |....
-        |----robot-agent 前置模块，sikulix封装
-        |    |--src
-        |       |--main
-        |          |--build  agent模块构建相关
-        |          |--java  源代码
-        |          |--resources  资源文件
-        |              |--Extensions sikulix 运行需要的插件
-        |
-        |----robot-api 
+        |----iot-park-api 
         |    |--db api模块需要的数据库文件
         |    |--src
         |       |--main
@@ -47,13 +39,13 @@ https://help.aliyun.com/document_detail/131611.html?spm=a2c4g.11186623.6.558.166
         |          |--java  源代码
         |          |--resources  资源文件
         |
-        |----robot-common 公用模块
+        |----iot-park-common 公用模块
         |
-        |----robot-generator 代码生成模块
+        |----iot-park-generator 代码生成模块
         |
-        |----SikuliX1-1.1.3 SikuliX1.1.3源代码
+        |----iot-park-transfer 数据中转模块
         |
-        |----SikuliX1-1.1.4-master SikuliX1.1.4源代码 github拷贝下来的master分支（正在开发的分支，非稳定版本），拷贝时间是20190605，如果需要查看最新版本的源代码需要去GitHub上下载
+        |----iot-park-test 测试
                 
    ![](./img/20191202145050.png)
    

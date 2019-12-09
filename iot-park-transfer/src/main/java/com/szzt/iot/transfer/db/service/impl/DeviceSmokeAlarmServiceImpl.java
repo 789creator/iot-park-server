@@ -132,7 +132,7 @@ public class DeviceSmokeAlarmServiceImpl extends CrudServiceImpl<DeviceSmokeAlar
         RabbitmqMsg rabbitmqMsg = new RabbitmqMsg<SmokeAlarmMsgBody>();
         rabbitmqMsg.setMsgHeader(msgHeader);
         rabbitmqMsg.setMsgBody(smokeAlarmMsgBody);
-        rabbitTemplate.convertAndSend("smokeAlarmTopicExchange", TopicSmokeAlarmRabbitConfig.SMOKE_ALARM_TOPIC, rabbitmqMsg);
+        rabbitTemplate.convertAndSend("smokeAlarmTopicExchange", TopicSmokeAlarmRabbitConfig.SMOKE_ALARM_TOPIC, JSONUtil.toJsonStr(rabbitmqMsg));
 
     }
 
