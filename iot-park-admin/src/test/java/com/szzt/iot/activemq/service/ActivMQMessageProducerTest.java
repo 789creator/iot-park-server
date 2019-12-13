@@ -118,28 +118,28 @@ public class ActivMQMessageProducerTest {
 
     public static void main(String[] args) throws JMSException {
         //创建消息头
-        MsgHeader msgHeader = new MsgHeader();
-        try {
-            //获取本机ip地址
-            msgHeader.setFromIp(InetAddress.getLocalHost().getHostAddress());
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-        msgHeader.setServiceId(MsgHeaderEnum.ServiceIdEnum.JUDGE_SERVICE.getCode());
-        msgHeader.setCmdId(MsgHeaderEnum.JudgeMsgCmdIdEnum.TO_CLIENT_JUDGE_REPLY.getCode());
-        msgHeader.setSendTime(System.currentTimeMillis());
-        JudgeReplyResultMsgBody judgeReplyResultMsgBody = new JudgeReplyResultMsgBody();
-        judgeReplyResultMsgBody.setProjectNO("123243");
-        judgeReplyResultMsgBody.setIsBidEvaluation(1);
-        judgeReplyResultMsgBody.setProjectName("测试");
-        judgeReplyResultMsgBody.setJudgePhone("18569080390");
-        //创建消息体
-        RabbitmqMsg<JudgeReplyResultMsgBody> rabbitmqMsg = new RabbitmqMsg<>();
-        rabbitmqMsg.setMsgHeader(msgHeader);
-        rabbitmqMsg.setMsgBody(judgeReplyResultMsgBody);
-        ActivMQMessageProducerTest activMQMessageProducerTest = new ActivMQMessageProducerTest();
-        activMQMessageProducerTest.topicName = "robot.to.judge.reply.result.topic";
-        activMQMessageProducerTest.subTopic();
-        activMQMessageProducerTest.sendMessage(JSONUtil.toJsonStr(rabbitmqMsg));
+//        MsgHeader msgHeader = new MsgHeader();
+//        try {
+//            //获取本机ip地址
+//            msgHeader.setFromIp(InetAddress.getLocalHost().getHostAddress());
+//        } catch (UnknownHostException e) {
+//            e.printStackTrace();
+//        }
+//        msgHeader.setServiceId(MsgHeaderEnum.ServiceIdEnum.JUDGE_SERVICE.getCode());
+//        msgHeader.setCmdId(MsgHeaderEnum.JudgeMsgCmdIdEnum.TO_CLIENT_JUDGE_REPLY.getCode());
+//        msgHeader.setSendTime(System.currentTimeMillis());
+//        JudgeReplyResultMsgBody judgeReplyResultMsgBody = new JudgeReplyResultMsgBody();
+//        judgeReplyResultMsgBody.setProjectNO("123243");
+//        judgeReplyResultMsgBody.setIsBidEvaluation(1);
+//        judgeReplyResultMsgBody.setProjectName("测试");
+//        judgeReplyResultMsgBody.setJudgePhone("18569080390");
+//        //创建消息体
+//        RabbitmqMsg<JudgeReplyResultMsgBody> rabbitmqMsg = new RabbitmqMsg<>();
+//        rabbitmqMsg.setMsgHeader(msgHeader);
+//        rabbitmqMsg.setMsgBody(judgeReplyResultMsgBody);
+//        ActivMQMessageProducerTest activMQMessageProducerTest = new ActivMQMessageProducerTest();
+//        activMQMessageProducerTest.topicName = "robot.to.judge.reply.result.topic";
+//        activMQMessageProducerTest.subTopic();
+//        activMQMessageProducerTest.sendMessage(JSONUtil.toJsonStr(rabbitmqMsg));
     }
 }

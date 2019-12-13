@@ -296,3 +296,7 @@ https://help.aliyun.com/document_detail/131611.html?spm=a2c4g.11186623.6.558.166
 	}
 	}
 
+
+# iot 参考资料
+  
+   通过WEB调用大华网络摄像头：https://www.cnblogs.com/whzhaochao/p/5023526.html

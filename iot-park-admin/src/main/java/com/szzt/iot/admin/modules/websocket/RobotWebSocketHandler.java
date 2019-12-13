@@ -1,6 +1,10 @@
 package com.szzt.iot.admin.modules.websocket;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.szzt.iot.admin.modules.security.user.UserDetail;
+import com.szzt.iot.common.websocket.MessageHeader;
+import com.szzt.iot.common.websocket.MessageHeaderEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -14,6 +18,7 @@ import java.util.concurrent.ConcurrentMap;
 
 @Slf4j
 public class RobotWebSocketHandler extends TextWebSocketHandler {
+
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static volatile int onlineCount = 0;
 
@@ -35,6 +40,15 @@ public class RobotWebSocketHandler extends TextWebSocketHandler {
             session.sendMessage(textMessage);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        // 解析消息
+        JSONObject jsonObject = JSONUtil.parseObj(message);
+        MessageHeader messageHeader = jsonObject.get("messageHeader", MessageHeader.class);
+        UserDetail user = (UserDetail) session.getAttributes().get("user");
+        Long userId = user.getId();
+        if (messageHeader.getActionCode() != MessageHeaderEnum.ActionCodeEnum.GET_SMOKE_ALARM_DATA.getCode()) {
+            // web端获取实时烟感数据
+            IMSendCache.addIMSendUser(userId, IMSendCache.CacheType.SMOKE_ALARM);
         }
     }
 
