@@ -16,7 +16,7 @@
 *.rar
 *.iml
 .idea
-
+/logs
 
 */target
 
